@@ -50,7 +50,7 @@ const ResponsiveNavbar: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      router.push('/login')
+      router.push('/')
       localStorage.removeItem("userInfo"); // Clear userInfo from local storage
       localStorage.removeItem("token"); // Clear userInfo from local storage
       setUserInfo(null); // Set userInfo state to null
