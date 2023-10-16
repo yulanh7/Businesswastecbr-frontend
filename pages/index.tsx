@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '../src/components/Layout';
 import ContactUs from "../src/components/ContactUs";
 import pageStyles from "../src/styles/page.module.scss";
 import utilsStyles from "../src/styles/utils.module.scss";
-import { Button, Container, Image } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import dynamic from 'next/dynamic';
 import Link from "next/link";
-import { FaPlay } from 'react-icons/fa';
 import Banner from "../src/components/Banner";
 
 const DynamicReactPlayer = dynamic(() => import('../src/components/VideoPlayer'), {
@@ -38,29 +37,10 @@ function HomePage() {
     }
   }
 
-  const handleVideoFinish = () => {
-    const section = document.getElementById("aboutUs");
-    const header = document.getElementById("header"); // Replace "header" with the actual selector for your header element
-    if (section && header) {
-      const headerHeight = header.clientHeight;
-      const sectionRect = section.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollToPosition = sectionRect.top + scrollTop - headerHeight;
 
-      window.scrollTo({
-        top: scrollToPosition,
-        behavior: "smooth",
-      });
-    }
-  }
-  const handlePlay = () => {
-    setHasStarted(true);
-    setPlaying(true);
-
-  };
   return (
 
-    <Layout>
+    <Layout loading={videoLoading}>
       <Banner screen="md">
         <h5>Online Interactive Recycling Training
         </h5>
