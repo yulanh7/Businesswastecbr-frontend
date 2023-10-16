@@ -49,6 +49,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
   const router = useRouter();
   const [videoLoading, setVideoLoading] = useState(true);
+  const [playing, setPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false); // Initially set to false
+
   const streamKey = Array.isArray(router.query.stream) ? router.query.stream[0] : router.query.stream;
   const [showQuestion, setShowQuestion] = useState(false);
   const [showQuestionBtn, setShowQuestionBtn] = useState(false);
@@ -103,6 +106,10 @@ const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
             setVideoLoading={setVideoLoading}
             autoPlay={true}
             onVideoFinish={handleVideoFinish}
+            playing={playing}
+            setPlaying={setPlaying}
+            hasStarted={hasStarted}
+            setHasStarted={setHasStarted}
           />
 
           {showQuestionBtn && questionByStream && !questionByStream.hasQuestionnaire && (

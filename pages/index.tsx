@@ -76,6 +76,10 @@ function HomePage() {
             altText="Video Cover"
             loading={videoLoading}
             setVideoLoading={setVideoLoading}
+            playing={playing}
+            setPlaying={setPlaying}
+            hasStarted={hasStarted}
+            setHasStarted={setHasStarted}
           />
           <p>
             Welcome to Sustainable Business Program recycling training. There are six brief videos and associated quizzes to complete. There will be a final sorting task to test your knowledge. The training will take around 15 minutes in total.

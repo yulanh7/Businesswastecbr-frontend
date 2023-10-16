@@ -11,7 +11,11 @@ interface VideoPlayerProps {
   loading?: boolean;
   setVideoLoading?: (loading: boolean) => void;
   onVideoFinish?: () => void;
-  autoPlay?: boolean; // The new prop
+  autoPlay?: boolean;
+  playing: boolean;
+  setPlaying: (playing: boolean) => void;
+  hasStarted: boolean;
+  setHasStarted: (hasStarted: boolean) => void;
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
@@ -21,10 +25,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   loading,
   setVideoLoading,
   onVideoFinish,
-  autoPlay = false
+  autoPlay = false,
+  playing,
+  setPlaying,
+  hasStarted,
+  setHasStarted,
 }) => {
-  const [hasStarted, setHasStarted] = useState(false); // Initially set to false
-  const [playing, setPlaying] = useState(false);
+
 
   useEffect(() => {
     if (autoPlay) {
@@ -50,8 +57,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     setPlaying(false);
   };
 
-  console.log('playing', playing)
-  console.log('hasStarted', hasStarted)
+
 
   return (
     <div className={pageStyles.videoContainer}>
