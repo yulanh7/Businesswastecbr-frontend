@@ -5,22 +5,17 @@ import AdminTable from '../src/components/AdminTable';
 import AddGroupLeaderModule from '../src/components/AddGroupLeaderModule';
 import utilStyles from "../src/styles/utils.module.scss";
 import { Container, Button } from 'react-bootstrap';
-import { UserData } from '../ultility/interfaces';
-import AddUserModal from '../src/components/AddUserModule';
+import AddAdminModule from '../src/components/AddAdminModule';
 
 function HomePage() {
-  const [showModal, setShowModal] = useState(false);
+  const [showGLModal, setShowGLModal] = useState(false);
+  const [showAdminModal, setShowAdminModal] = useState(false);
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-  const addUser = async (userData: UserData) => {
-    try {
+  const handleShowGLModal = () => setShowGLModal(true);
+  const handleCloseGLModal = () => setShowGLModal(false);
+  const handleShowAdminModal = () => setShowAdminModal(true);
+  const handleCloseAdminModal = () => setShowAdminModal(false);
 
-      setShowModal(false); // Close the modal
-    } catch (error) {
-      console.error('Error adding user:', error);
-    }
-  };
   return (
 
     <Layout>
@@ -30,7 +25,7 @@ function HomePage() {
           The group leader is your main contact person at the business. Enter their details. The group leader will automatically receive a link to logon to their account,
           and will be able to add staff singly or in bulk. The reset password button will generate and send the link again if required.
         </p>
-        <Button onClick={handleShowModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add Group Leader</Button>
+        <Button onClick={handleShowGLModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add Group Leader</Button>
 
         <GroupLeaderTable />
         <div className={utilStyles.pB50px}></div>
@@ -38,8 +33,10 @@ function HomePage() {
         <p className={utilStyles.sectionSubTitleCenter}>
           Add or delete ACT Government Sustainable Business Program team members to enable them access to the Admin console
         </p>
+        <Button onClick={handleShowAdminModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add Admin</Button>
         <AdminTable />
-        <AddGroupLeaderModule show={showModal} onHide={handleCloseModal} />
+        <AddGroupLeaderModule show={showGLModal} onHide={handleCloseGLModal} />
+        <AddAdminModule show={showAdminModal} onHide={handleCloseAdminModal} />
       </Container>
     </Layout>
   )

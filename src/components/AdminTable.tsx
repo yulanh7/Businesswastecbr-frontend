@@ -1,59 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form, Table } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, Form, Table, Pagination } from 'react-bootstrap';
 // import { formatDateForInput, formatDatetimeLocal, formatDatetimeLocalForInput, formatDate } from "../../utils/utils";
 import utilStyles from "../styles/utils.module.scss";
 import {
   fetchAllAdminSlice,
   bulkDeleteAdminSlice,
-  bulkResetPWAdminSlice
+  bulkResetPWAdminSlice,
+  resetForm
 } from "../../store/userSlice"
 import { RootState, useAppDispatch } from '../../store';
 import { useSelector } from 'react-redux';
+import { defaultUsersObject } from "../../ultility/interfaces";
 import SortIcons from "./SortIcons";
+
 
 interface Admin {
   userId: string,
-  businessName: string,
-  businessType: string,
   firstName: string,
   lastName: string,
   email: string,
-  phone: string,
   userType: string,
-  totalUser: number,
-  trainingPercentage: number,
-  totalEmployees: number,
-  trainedEmployees: number,
+
 }
 
 interface AdminTableProps {
   allAdmin: Admin[];
 }
 
-
-
-
 const AdminTable: React.FC = () => {
   const { allAdmin, fetchUserLoading } = useSelector((state: RootState) => state.user);
+
+  // const totalPages = Math.ceil(totalRecord / pageSize);
+
   const dispatch = useAppDispatch();
   const [selectedAdmin, setSelectedAdmin] = useState<string[]>([]);
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-
   const [editingAdminId, setEditingAdminId] = useState<string | null>(null);
   const [editingAdmin, setEditingAdmin] = useState<Map<string, Admin>>(new Map());
+  const [page, setPage] = useState(1);
   const [errors, setErrors] = useState<{
     businessName?: string,
     businessType?: string,
     firstName?: string,
     lastName?: string,
     email?: string,
-    phone?: string,
     userType?: string,
   }>({});
-
+  const [sortColumn, setSortColumn] = useState<string | null>(null);
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
+    // localStorage.setItem('adminPage', '1');
     dispatch(fetchAllAdminSlice({}));
   }, [dispatch]);
 
@@ -64,7 +60,6 @@ const AdminTable: React.FC = () => {
       firstName?: string,
       lastName?: string,
       email?: string,
-      phone?: string,
     } = {};
 
     if (editedAdmin.firstName.trim() === '') {
@@ -79,8 +74,6 @@ const AdminTable: React.FC = () => {
       newErrors.email = 'Email is required';
       isValid = false;
     }
-
-
     setErrors(newErrors);
     return isValid;
   };
@@ -111,7 +104,6 @@ const AdminTable: React.FC = () => {
         firstName: editedAdmin.firstName,
         lastName: editedAdmin.lastName,
         email: editedAdmin.email,
-        phone: editedAdmin.phone,
         userId: userId,
       };
       // await dispatch(updateAdminSlice(payload));
@@ -130,6 +122,8 @@ const AdminTable: React.FC = () => {
     if (confirmDelete) {
       await dispatch(bulkDeleteAdminSlice({ userIds: selectedAdmin }));
       setSelectedAdmin([]);
+
+      dispatch(fetchAllAdminSlice({}));
     }
   };
 
@@ -145,49 +139,46 @@ const AdminTable: React.FC = () => {
     }
   };
 
+
+
+
   const handleSort = (column: string, direction: "asc" | "desc") => {
     setSortColumn(column);
     setSortDirection(direction);
     dispatch(fetchAllAdminSlice({
-      // page: 1,
       sortColumn: column,
       sortDirection: direction
     }));
   };
 
-
-
   return (
     <div>
-      {/* <div className='table-action'>
-
+      <div className='table-action'>
         <Button variant="danger" onClick={handleDeleteSelectedClick}>
           Delete
         </Button>
         <Button variant="warning" onClick={() => handleResetPWSelectedClick()}>Reset Password</Button>
-      </div> */}
-
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
-            {/* <th>
+            <th>
               <Form.Check
                 type="checkbox"
                 checked={allAdmin && allAdmin.length > 0 && selectedAdmin.length === allAdmin.length}
                 onChange={() => {
-                  let newSelectedAdmin: string[] = [];
-
+                  let newSelectedLeaders: string[] = [];
                   if (selectedAdmin.length !== allAdmin.length) {
-                    newSelectedAdmin = allAdmin.map((leader: Admin) => leader.userId);
+                    newSelectedLeaders = allAdmin.map((leader: Admin) => leader.userId);
                   }
-
-                  setSelectedAdmin(newSelectedAdmin);
+                  setSelectedAdmin(newSelectedLeaders);
                 }}
               />
 
-
-            </th> */}
+            </th>
             <th>#</th>
+
+
             <th>
               <div>
                 First Name
@@ -221,121 +212,139 @@ const AdminTable: React.FC = () => {
                 />
               </div>
             </th>
-            {/* <th>Actions</th> */}
+
+
+
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {allAdmin && allAdmin.length > 0 && !fetchUserLoading && allAdmin.map((user: Admin, index: number) => (
-            <tr key={user.userId}>
-              {/* <td>
-                <Form.Check
-                  type="checkbox"
-                  checked={selectedAdmin.includes(user.userId)}  // Check if current user is selected
-                  onChange={() => {
-                    const newSelectedAdmin = selectedAdmin.includes(user.userId)
-                      ? selectedAdmin.filter(id => id !== user.userId)  // If currently selected, remove it from the selection
-                      : [...selectedAdmin, user.userId];  // If not selected, add to the selection
-                    setSelectedAdmin(newSelectedAdmin);
-                  }}
-                />
-              </td> */}
-              <td>{index + 1}</td>
-              <td>
-                {editingAdminId === user.userId ? (
-                  <>
-                    <Form.Control
-                      type="text"
-                      defaultValue={user.firstName}
-                      className={errors.firstName && 'is-invalid'}
-                      onChange={(e) => {
-                        const newValue = e.target.value;
-                        const updatedEditingusers = new Map(editingAdmin);
-                        const editeduser = updatedEditingusers.get(user.userId);
-                        if (editeduser) {
-                          editeduser.firstName = newValue;
-                          updatedEditingusers.set(user.userId, editeduser);
-                          setEditingAdmin(updatedEditingusers);
-                        }
-                      }}
-                    />
-                    {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}
-                  </>
-                ) : (
-                  user.firstName
-                )}
-              </td>
-              <td>
-                {editingAdminId === user.userId ? (
-                  <>
-                    <Form.Control
-                      type="text"
-                      defaultValue={user.lastName}
-                      className={errors.lastName && 'is-invalid'}
-                      onChange={(e) => {
-                        const newValue = e.target.value;
-                        const updatedEditingusers = new Map(editingAdmin);
-                        const editeduser = updatedEditingusers.get(user.userId);
-                        if (editeduser) {
-                          editeduser.lastName = newValue;
-                          updatedEditingusers.set(user.userId, editeduser);
-                          setEditingAdmin(updatedEditingusers);
-                        }
-                      }}
-                    />
-                    {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}
-                  </>
-                ) : (
-                  user.lastName
-                )}
-              </td>
-              <td>
-                {editingAdminId === user.userId ? (
-                  <>
-                    <Form.Control
-                      type="email"
-                      defaultValue={user.email}
-                      className={errors.email && 'is-invalid'}
-                      onChange={(e) => {
-                        const newValue = e.target.value;
-                        const updatedEditingusers = new Map(editingAdmin);
-                        const editeduser = updatedEditingusers.get(user.userId);
-                        if (editeduser) {
-                          editeduser.email = newValue;
-                          updatedEditingusers.set(user.userId, editeduser);
-                          setEditingAdmin(updatedEditingusers);
-                        }
-                      }}
-                    />
-                    {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-                  </>
-                ) : (
-                  user.email
-                )}
-              </td>
+          {!fetchUserLoading && allAdmin && allAdmin.length > 0 ? (
+            // If data is loaded, show the data
+            allAdmin.map((user: Admin, index: number) => (
+              <tr key={user.userId}>
+                <td>
+                  <Form.Check
+                    type="checkbox"
+                    checked={selectedAdmin.includes(user.userId)}  // Check if current user is selected
+                    onChange={() => {
+                      const newSelectedLeaders = selectedAdmin.includes(user.userId)
+                        ? selectedAdmin.filter(id => id !== user.userId)  // If currently selected, remove it from the selection
+                        : [...selectedAdmin, user.userId];  // If not selected, add to the selection
+                      setSelectedAdmin(newSelectedLeaders);
+                    }}
+                  />
+                </td>
+                <td>{index + 1}</td>
+                <td>
+                  {editingAdminId === user.userId ? (
+                    <>
+                      <Form.Control
+                        type="text"
+                        defaultValue={user.firstName}
+                        className={errors.firstName && 'is-invalid'}
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          const updatedEditingusers = new Map(editingAdmin);
+                          const editeduser = updatedEditingusers.get(user.userId);
+                          if (editeduser) {
+                            editeduser.firstName = newValue;
+                            updatedEditingusers.set(user.userId, editeduser);
+                            setEditingAdmin(updatedEditingusers);
+                          }
+                        }}
+                      />
+                      {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}
+                    </>
+                  ) : (
+                    user.firstName
+                  )}
+                </td>
+                <td>
+                  {editingAdminId === user.userId ? (
+                    <>
+                      <Form.Control
+                        type="text"
+                        defaultValue={user.lastName}
+                        className={errors.lastName && 'is-invalid'}
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          const updatedEditingusers = new Map(editingAdmin);
+                          const editeduser = updatedEditingusers.get(user.userId);
+                          if (editeduser) {
+                            editeduser.lastName = newValue;
+                            updatedEditingusers.set(user.userId, editeduser);
+                            setEditingAdmin(updatedEditingusers);
+                          }
+                        }}
+                      />
+                      {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}
+                    </>
+                  ) : (
+                    user.lastName
+                  )}
+                </td>
+                <td>
+                  {editingAdminId === user.userId ? (
+                    <>
+                      <Form.Control
+                        type="email"
+                        defaultValue={user.email}
+                        className={errors.email && 'is-invalid'}
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          const updatedEditingusers = new Map(editingAdmin);
+                          const editeduser = updatedEditingusers.get(user.userId);
+                          if (editeduser) {
+                            editeduser.email = newValue;
+                            updatedEditingusers.set(user.userId, editeduser);
+                            setEditingAdmin(updatedEditingusers);
+                          }
+                        }}
+                      />
+                      {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                    </>
+                  ) : (
+                    user.email
+                  )}
+                </td>
 
 
-              {/* <td>
-                {editingAdminId === user.userId ? (
-                  <>
-                    <div className={utilStyles.pB10px}>
-                      <Button variant="success" onClick={() => handleSaveEdit(user.userId)} className={utilStyles.tableButton}>
-                        Save
+
+                <td>
+                  {editingAdminId === user.userId ? (
+                    <>
+                      <div className={utilStyles.pB10px}>
+                        <Button variant="success" onClick={() => handleSaveEdit(user.userId)} className={utilStyles.tableButton}>
+                          Save
+                        </Button>
+                      </div>
+                      <Button variant="secondary" size="sm" onClick={handleCancelEdit} className={utilStyles.tableButton}>
+                        Cancel
                       </Button>
-                    </div>
-                    <Button variant="secondary" size="sm" onClick={handleCancelEdit} className={utilStyles.tableButton}>
-                      Cancel
+                    </>
+                  ) : (
+                    <Button variant="info" onClick={() => handleEditClick(user.userId)} className={`${utilStyles.tableButton}`} >
+                      Edit
                     </Button>
-                  </>
-                ) : (
-                  <Button variant="primary" onClick={() => handleEditClick(user.userId)} className={`${utilStyles.tableButton}`} >
-                    Edit
-                  </Button>
-                )}
-              </td> */}
+                  )}
+                </td>
+              </tr>
+            ))
+          ) : (
+            // If no data is available, show a no data message
+            <tr>
+              <td colSpan={12} style={{ textAlign: 'center' }}>
+                No data available
+              </td>
             </tr>
-          ))}
+          )}
+
+
+
         </tbody>
       </Table >
+
     </div>
 
   );

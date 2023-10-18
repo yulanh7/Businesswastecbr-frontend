@@ -48,10 +48,10 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
     }
 
 
-    if (!isRecaptchaVerified) {
-      newFormErrors.isRecaptchaVerified = 'Please verify reCAPTCHA before submitting.';
-      isValid = false;
-    }
+    // if (!isRecaptchaVerified) {
+    //   newFormErrors.isRecaptchaVerified = 'Please verify reCAPTCHA before submitting.';
+    //   isValid = false;
+    // }
 
 
     setFormErrors(newFormErrors);
