@@ -14,7 +14,7 @@ const DynamicReactPlayer = dynamic(() => import('../src/components/VideoPlayer')
 
 function HomePage() {
 
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const [videoLoading, setVideoLoading] = useState(true)
 

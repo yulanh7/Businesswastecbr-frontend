@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
   const router = useRouter();
   const [videoLoading, setVideoLoading] = useState(true);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const [hasStarted, setHasStarted] = useState(false); // Initially set to false
 
   const streamKey = Array.isArray(router.query.stream) ? router.query.stream[0] : router.query.stream;
@@ -88,6 +88,12 @@ const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
     dispatch(resetQuestionMessage());
   }, [router, dispatch]);
 
+  useEffect(() => {
+    setPlaying(true);
+    setHasStarted(false);
+  }, [currentStream]);
+
+
   return (
     <Layout loading={fetchQuestionLoading || videoLoading}>
       <Container className="page-section" id="stream-section">
@@ -104,7 +110,6 @@ const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
             altText="Video Cover"
             loading={videoLoading}
             setVideoLoading={setVideoLoading}
-            autoPlay={true}
             onVideoFinish={handleVideoFinish}
             playing={playing}
             setPlaying={setPlaying}
@@ -113,7 +118,7 @@ const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
           />
 
           {showQuestionBtn && questionByStream && !questionByStream.hasQuestionnaire && (
-            <div>
+            <div className={utilStyles.smContainer}>
               {submitQuestionMessage && (
                 <div className="success-message">
                   {submitQuestionMessage}

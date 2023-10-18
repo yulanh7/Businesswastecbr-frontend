@@ -11,7 +11,6 @@ interface VideoPlayerProps {
   loading?: boolean;
   setVideoLoading?: (loading: boolean) => void;
   onVideoFinish?: () => void;
-  autoPlay?: boolean;
   playing: boolean;
   setPlaying: (playing: boolean) => void;
   hasStarted: boolean;
@@ -25,19 +24,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   loading,
   setVideoLoading,
   onVideoFinish,
-  autoPlay = false,
   playing,
   setPlaying,
   hasStarted,
   setHasStarted,
 }) => {
-
-
-  useEffect(() => {
-    if (autoPlay) {
-      setPlaying(true);
-    }
-  }, [autoPlay]);
 
   const handlePlay = () => {
     setHasStarted(true);
