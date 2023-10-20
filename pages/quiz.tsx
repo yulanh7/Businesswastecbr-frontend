@@ -78,6 +78,8 @@ const QuizPage = () => {
             <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
             </h5>
             <Button className={utilStyles.mT10px} onClick={handleDone}>Return to Home</Button>
+            <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
+
           </Card>
         )}
 

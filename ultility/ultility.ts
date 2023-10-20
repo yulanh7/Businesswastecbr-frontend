@@ -104,8 +104,8 @@ export const renderImg = (itemName: string) => {
     },
     {
       id: 20,
-      title: "bubble wrap",
-      img: "/images/questions/Bubble Wrap.jpg",
+      title: "battery",
+      img: "/images/questions/battery.jpg",
     },
     {
       id: 21,
