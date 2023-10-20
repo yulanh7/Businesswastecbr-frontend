@@ -98,7 +98,7 @@ const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
     <Layout loading={fetchQuestionLoading || videoLoading}>
       <Container className="page-section" id="stream-section">
         <Row className={`${utilStyles.SmRow} ${utilStyles.flexCenter}`}>
-          <h4 className={`${utilStyles.textCenter} ${utilStyles.pB20px}`}>{currentStream?.title}</h4>
+          <h3 className={`${utilStyles.textCenter} ${utilStyles.pB20px}`}>{currentStream?.title}</h3>
           {showQuestionBtn && questionByStream && questionByStream.hasQuestionnaire && !showQuestion && (
             <Button onClick={handleShowQuestion} className={utilStyles.questionBtn}>Answer Questions </Button>
           )}

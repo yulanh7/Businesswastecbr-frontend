@@ -175,14 +175,14 @@ export type StreamType = {
 export const STREAMS: { [key: string]: StreamType } = {
   stream1: {
     videoUrl: "02_Paper",
-    title: "Paper",
+    title: "Paper Recycling",
     id: "64e5600b4f6603d18855481d",
     next: "/training/stream2",
     imageSrc: "stream_cover1",
   },
   stream2: {
     videoUrl: "03_Mixed",
-    title: "Mixed",
+    title: "Mixed Recycling",
     id: "64e564734f6603d188554858",
     next: "/training/stream3",
     prev: "/training/stream1",
@@ -198,7 +198,7 @@ export const STREAMS: { [key: string]: StreamType } = {
   },
   stream4: {
     videoUrl: "05_Hazardous",
-    title: "Hazardous",
+    title: "Hazardous Waste",
     id: "64e565a14f6603d188554867",
     next: "/training/stream5",
     prev: "/training/stream3",
@@ -206,7 +206,7 @@ export const STREAMS: { [key: string]: StreamType } = {
   },
   stream5: {
     videoUrl: "06_Other",
-    title: "Other",
+    title: "Other Recycling Opportunities",
     id: "64e58022d26922cec47302d1",
     next: "/training/stream6",
     prev: "/training/stream4",
