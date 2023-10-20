@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../src/components/Layout';
-import ContactUs from "../src/components/ContactUs";
+// import ContactUs from "../src/components/ContactUs";
 import pageStyles from "../src/styles/page.module.scss";
 import utilsStyles from "../src/styles/utils.module.scss";
 import { Button } from "react-bootstrap";
@@ -70,7 +70,7 @@ function HomePage() {
           </Link>
         </div>
       </div>
-      <ContactUs />
+      {/* <ContactUs /> */}
     </Layout >
   )
 }
