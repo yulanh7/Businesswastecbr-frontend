@@ -129,21 +129,7 @@ const Question: React.FC<QuestionProps> = ({
                       key={option}
                       type={question.type === "single" ? "radio" : "checkbox"}
                       name={`question_${question._id}`}
-                      label={
-                        isSubmitted ? (
-                          question.correctAnswers.includes(option)
-                        ) ? (
-                          <div>
-                            {option} <FontAwesomeIcon icon={faCheck} />
-                          </div>
-                        ) : (
-                          <div>
-                            {option} <FontAwesomeIcon icon={faTimes} />
-                          </div>
-                        ) : (
-                          option
-                        )
-                      }
+                      label={option}
                       checked={
                         selectedAnswers[question._id]
                           ? selectedAnswers[question._id].includes(option)
