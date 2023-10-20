@@ -30,8 +30,8 @@ const ResetPassword: React.FC<ResetPasswordPros> = ({ handleBackToLogin, token, 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Basic password format check
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-      setPasswordError('Password must be at least 8 characters long and include both letters and numbers.');
+    if (!/^.{8,}$/.test(password)) {
+      setPasswordError('Password must be at least 8 characters long.');
       return;
     }
     // Confirm password validation

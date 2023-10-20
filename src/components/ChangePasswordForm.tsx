@@ -14,6 +14,7 @@ type MessageKey = 'success' | 'failure' | 'passwordError' | 'confirmPasswordErro
 const ChangePasswordForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const { submitUserMessage, submitUserError } = useSelector((state: RootState) => state.user);
+  const [passwordError, setPasswordError] = useState('');
 
   const [formData, setFormData] = useState({
     currentPassword: '',
@@ -30,8 +31,6 @@ const ChangePasswordForm: React.FC = () => {
   const [messages, setMessages] = useState({
     success: '',
     failure: '',
-    passwordError: '',
-    confirmPasswordError: ''
   });
 
   useEffect(() => {
@@ -45,21 +44,20 @@ const ChangePasswordForm: React.FC = () => {
     setMessages({
       success: '',
       failure: '',
-      passwordError: '',
-      confirmPasswordError: ''
     });
+    setPasswordError("");
   }
 
   const handleSubmitChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formData.newPassword)) {
-      setMessages(prev => ({ ...prev, passwordError: 'Password must be at least 8 characters long and include both letters and numbers.' }));
+    if (!/^.{8,}$/.test(formData.newPassword)) {
+      setPasswordError('Password must be at least 8 characters long');
       return;
     }
 
     if (formData.newPassword !== formData.confirmPassword) {
-      setMessages(prev => ({ ...prev, confirmPasswordError: 'Passwords do not match.' }));
+      setPasswordError('Passwords do not match.');
       return;
     }
 
@@ -87,15 +85,14 @@ const ChangePasswordForm: React.FC = () => {
           {visibility[name] ? <FaEyeSlash /> : <FaEye />}
         </InputGroup.Text>
       </InputGroup>
-      {messages[`${name}Error` as MessageKey] && <div className="error-message">{messages[`${name}Error` as MessageKey]}</div>}
     </Form.Group>
   );
-
   return (
     <Form onSubmit={handleSubmitChangePassword}>
       {renderInput('currentPassword', 'Enter current password')}
       {renderInput('newPassword', 'Enter new password')}
       {renderInput('confirmPassword', 'Confirm new password')}
+      {passwordError && <div className="error-message">{passwordError}</div>}
       {messages.success && <div className="success-message">{messages.success}</div>}
       {messages.failure && <div className="error-message">{messages.failure}</div>}
       <Button variant="primary" type="submit">
