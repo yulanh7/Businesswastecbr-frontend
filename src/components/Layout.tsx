@@ -54,7 +54,7 @@ export default function Layout({ children, subTitle, topSubTitle, loading = fals
           <div className={isScrolled ? `${styles.headerContainer} ${styles.fixedHeader}` : styles.headerContainer} id="header">
             <Container className={styles.headerTop}>
               <div className={utilStyles.logBox}>
-                <a target="_blank" rel="noopener noreferrer" href="/">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.climatechoices.act.gov.au/">
                   <div className={utilStyles.logTextBox}>
 
                     <div className={utilStyles.first}>
