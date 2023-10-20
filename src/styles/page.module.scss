@@ -523,12 +523,12 @@
     }
   }
 }
+.itemName{
+  text-transform: capitalize;
+}
 .quizPageSection2 {
   padding: 5% 10px;
   background-color: #F5F5F5;
-  .itemName{
-    text-transform: capitalize;
-  }
 }
 .quziBtnContainer {
   margin: 30px;

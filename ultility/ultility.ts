@@ -74,7 +74,7 @@ export const renderImg = (itemName: string) => {
     },
     {
       id: 14,
-      title: "berry punnet",
+      title: "berry punnet, plastic code 1",
       img: "/images/questions/Punnet.jpg",
     },
     {
