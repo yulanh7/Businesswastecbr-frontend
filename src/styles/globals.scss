@@ -541,3 +541,8 @@ button.btn.btn-primary:hover {
   font-size: 100px;
   color: $primaryColor;
 }
+
+.option-label {
+  display: inline-block;
+  margin-right: 10px; /* Adjust this value as needed for spacing */
+}

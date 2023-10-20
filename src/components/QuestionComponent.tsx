@@ -123,25 +123,33 @@ const Question: React.FC<QuestionProps> = ({
               <Card.Title>{question.questionText}</Card.Title>
               <Form>
                 {question.options.map((option) => (
-                  <>
-                    <Form.Check
-                      disabled={isSubmitted}
-                      key={option}
-                      type={question.type === "single" ? "radio" : "checkbox"}
-                      name={`question_${question._id}`}
-                      label={option}
-                      checked={
-                        selectedAnswers[question._id]
-                          ? selectedAnswers[question._id].includes(option)
-                          : false
-                      }
-                      onChange={() => handleOptionSelect(question._id, option, question.type)}
+                  <div key={option}>
+                    <label
+                      className='question-input-box'
                       style={isSubmitted ? {
                         color: question.correctAnswers.includes(option) ? 'green' : ''
                       } : {}}
-                    />
-                  </>
+                    >
+                      <Form.Check
+                        disabled={isSubmitted}
+                        type={question.type === "single" ? "radio" : "checkbox"}
+                        name={`question_${question._id}`}
+                        // label={option}
+                        className="option-label"
+                        checked={
+                          selectedAnswers[question._id]
+                            ? selectedAnswers[question._id].includes(option)
+                            : false
+                        }
+                        onChange={() => handleOptionSelect(question._id, option, question.type)}
+
+                      />
+                      {option}
+                    </label>
+                  </div>
                 ))}
+
+
               </Form>
               {isSubmitted && !answerIsCorrect ?
                 (selectedAnswers[question._id] && selectedAnswers[question._id].every(ans => question.correctAnswers.includes(ans))
