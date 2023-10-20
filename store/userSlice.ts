@@ -41,7 +41,6 @@ const defaultSelfDetailProps = {
   firstName: "",
   lastName: "",
   email: "",
-  phone: "",
 };
 
 interface UsersProps {
@@ -66,7 +65,7 @@ interface UserData {
   submitUserError: string | null;
   submitUserMessage: string | null;
   bulkAddUserMessage: any;
-  selfDetail: updateSelfDetailProps;
+  selfDetail: any;
 }
 
 const initialState: UserData = {

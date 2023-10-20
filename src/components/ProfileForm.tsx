@@ -10,7 +10,6 @@ const defaultuserProps = {
   firstName: '',
   lastName: '',
   email: '',
-  phone: '',
 }
 
 export default function ProfileComponent() {
@@ -52,11 +51,7 @@ export default function ProfileComponent() {
       isValid = false;
     }
 
-    // Validating the phone
-    if (formData.phone.trim() === '') {
-      newFormErrors.phone = 'Phone is required';
-      isValid = false;
-    }
+
 
     // ... Add similar validations for other fields
 
@@ -86,7 +81,7 @@ export default function ProfileComponent() {
     <div>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col xs='12' sm='6'>
+          <Col xs='12' >
             <Form.Group controlId="firstName">
               <Form.Control
                 type="text"
@@ -99,7 +94,7 @@ export default function ProfileComponent() {
               {formErrors.firstName && <div className="invalid-feedback">{formErrors.firstName}</div>}
             </Form.Group>
           </Col>
-          <Col xs='12' sm='6'>
+          <Col xs='12' >
             <Form.Group controlId="lastName">
               <Form.Control
                 type="text"
@@ -112,7 +107,7 @@ export default function ProfileComponent() {
               {formErrors.lastName && <div className="invalid-feedback">{formErrors.lastName}</div>}
             </Form.Group>
           </Col>
-          <Col xs='12' sm='6'>
+          <Col xs='12' >
             <Form.Group controlId="email">
               <Form.Control
                 type="email"
@@ -125,26 +120,14 @@ export default function ProfileComponent() {
               {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
             </Form.Group>
           </Col>
-          <Col xs='12' sm='6'>
-            <Form.Group controlId="phone">
-              <Form.Control
-                type="text"
-                name="phone"
-                placeholder='Phone'
-                value={formData.phone}
-                onChange={handleChange}
-                className={formErrors.phone && 'is-invalid'}
-              />
-              {formErrors.phone && <div className="invalid-feedback">{formErrors.phone}</div>}
-            </Form.Group>
-          </Col>
+
         </Row>
 
         <div className={utilStyles.textCenter}>
           <Button
             variant="primary"
             type="submit"
-          // className={utilStyles.button}
+            className={utilStyles.button}
           >
             SUBMIT
           </Button>
