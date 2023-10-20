@@ -118,7 +118,7 @@ const Question: React.FC<QuestionProps> = ({
       )}
       {question && question.questionnaire && !fetchQuestionLoading && (
         question.questionnaire.map((question: QuestionItem) => (
-          <Card key={question._id} className="my-3">
+          <Card key={question._id} className={`my-3 ${isSubmitted && !answerIsCorrect ? "questionWithAnswer" : ""}`}>
             <Card.Body>
               <Card.Title>{question.questionText}</Card.Title>
               <Form>
@@ -140,10 +140,7 @@ const Question: React.FC<QuestionProps> = ({
                         color: question.correctAnswers.includes(option) ? 'green' : ''
                       } : {}}
                     />
-
-
                   </>
-
                 ))}
               </Form>
               {isSubmitted && !answerIsCorrect ?

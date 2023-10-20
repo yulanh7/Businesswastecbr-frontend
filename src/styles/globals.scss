@@ -508,14 +508,23 @@ button.btn.btn-primary:hover {
   visibility: hidden;
 }
 
-
+.questionWithAnswer {
+  margin-left: 60px;
+  @media (max-width:767px ) {
+    margin-left: 40px;
+  }
+}
 
 .answer-icon {
   font-size: 60px;
   position: absolute;
-  top: 45%;
-  right: 40px;
-&.correct-icon-big{
+  top: 0;
+  left: -60px;
+  @media (max-width:767px ) {
+    font-size: 40px;
+    left: -40px;
+  }
+  &.correct-icon-big{
     color: $primaryColor;
   }
   &.wrong-icon-big {
