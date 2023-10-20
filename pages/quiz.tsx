@@ -77,8 +77,7 @@ const QuizPage = () => {
             </p>
             <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
             </h5>
-            <Button onClick={handleDone}>Done</Button>
-
+            <Button className={utilStyles.mT10px} onClick={handleDone}>Return to Home</Button>
           </Card>
         )}
 
@@ -112,7 +111,7 @@ const QuizPage = () => {
               <>
                 <h5>Sorry. You did not pass the quiz this time. Scroll down to see your answers and the correct answers. Then try again.</h5>
                 <div className={utilStyles.actionContainer}>
-                  <Button onClick={handleDone}>Done</Button>
+                  <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
                 </div>
               </>
             )}
@@ -123,6 +122,8 @@ const QuizPage = () => {
                   Scroll down to see your answers and the correct answers</h5>
                 <div className={utilStyles.actionContainer}>
                   <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
+                  <Button onClick={handleDone}>Done</Button>
+
                 </div>
               </>
             )}
@@ -131,7 +132,6 @@ const QuizPage = () => {
                 <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
                 </h5>
                 <div className={utilStyles.actionContainer}>
-                  <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
                   <Button onClick={handleDone}>Done</Button>
                 </div>
               </>
