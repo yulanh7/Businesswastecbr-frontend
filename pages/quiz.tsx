@@ -17,10 +17,13 @@ import { renderImg } from "../ultility/ultility";
 import Banner from "../src/components/Banner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
 
 
 const QuizPage = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const {
     allQuiz,
     currentQuizIndex,
@@ -52,6 +55,11 @@ const QuizPage = () => {
   const handleTryAgain = () => {
     dispatch(resetQuizPage());
   }
+
+  const handleDone = () => {
+    router.push('/')
+  }
+
   return (
     <Layout loading={fetchQuizLoading}>
       {allQuiz && allQuiz.length > 0 && ((currentQuizScore !== null && currentQuizScore < 90) || !currentQuizScore) && !userAnswerResponse && (
@@ -69,7 +77,7 @@ const QuizPage = () => {
             </p>
             <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
             </h5>
-            <Button onClick={handleTryAgain}>Try Again</Button>
+            <Button onClick={handleDone}>Done</Button>
 
           </Card>
         )}
@@ -101,21 +109,33 @@ const QuizPage = () => {
             <p><b>Your Best Score:</b> {highestScore}%</p>
             <p><b>Your Score:</b> {parseInt(currentQuizScore)}%</p>
             {currentQuizScore < 90 && (
-              <h5>Sorry. You did not pass the quiz this time. Scroll down to see your answers and the correct answers. Then try again.</h5>
+              <>
+                <h5>Sorry. You did not pass the quiz this time. Scroll down to see your answers and the correct answers. Then try again.</h5>
+                <div className={utilStyles.actionContainer}>
+                  <Button onClick={handleDone}>Done</Button>
+                </div>
+              </>
             )}
 
             {currentQuizScore >= 90 && currentQuizScore < 100 && (
-              <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
-                Scroll down to see your answers and the correct answers</h5>
+              <>
+                <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
+                  Scroll down to see your answers and the correct answers</h5>
+                <div className={utilStyles.actionContainer}>
+                  <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
+                </div>
+              </>
             )}
             {currentQuizScore == 100 && (
-              <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
-              </h5>
+              <>
+                <h5>Congratulations. You have successfully completed the Sustainable Business Program recycling training.
+                </h5>
+                <div className={utilStyles.actionContainer}>
+                  <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
+                  <Button onClick={handleDone}>Done</Button>
+                </div>
+              </>
             )}
-            <div className={utilStyles.actionContainer}>
-              <Button onClick={handleTryAgain} className={utilStyles.mR10px}>Try Again</Button>
-              <Button onClick={handleShowModal}>Ask A Question</Button>
-            </div>
           </Card>
         </Container>
       )}
