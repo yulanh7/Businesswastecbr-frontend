@@ -24,6 +24,7 @@ import {
   contactUs,
   askAQuestion,
   registerAdmin,
+  updateAdmin,
 } from "../api/api";
 import Router from "next/router";
 import {
@@ -142,6 +143,9 @@ const useSlice = createSlice({
     },
     updateGroupLeaderSuccess: (state, action: PayloadAction<any>) => {
       state.allGroupLeaders = action.payload;
+    },
+    updateAdminSuccess: (state, action: PayloadAction<any>) => {
+      state.allAdmin = action.payload;
     },
     submitUserSuccess: (state, action: PayloadAction<any>) => {
       state.submitUserLoading = false;
@@ -402,6 +406,20 @@ export const updateGroupLeaderSlice =
         page: groupLeaderPage,
       });
       dispatch(fetchAllGroupLeadersSuccess(data));
+    } catch (error: any) {
+      dispatch(submitUserFailure(error.message));
+    }
+  };
+export const updateAdminSlice =
+  (
+    payload: updateGroupLeaderProps
+  ): AppThunk<Promise<void>> => // Add <Promise<void>> to specify the return type
+  async (dispatch) => {
+    try {
+      dispatch(submitUserStart());
+      await updateAdmin(payload);
+      const response = await fetchAllAdmin({});
+      dispatch(fetchAllAdminSuccess(response));
     } catch (error: any) {
       dispatch(submitUserFailure(error.message));
     }

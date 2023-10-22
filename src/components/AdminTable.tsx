@@ -6,6 +6,7 @@ import {
   fetchAllAdminSlice,
   bulkDeleteAdminSlice,
   bulkResetPWAdminSlice,
+  updateAdminSlice,
   resetForm
 } from "../../store/userSlice"
 import { RootState, useAppDispatch } from '../../store';
@@ -13,6 +14,13 @@ import { useSelector } from 'react-redux';
 import { defaultUsersObject } from "../../ultility/interfaces";
 import SortIcons from "./SortIcons";
 
+
+const defaultAdminProps = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+}
 
 interface Admin {
   userId: string,
@@ -30,13 +38,10 @@ interface AdminTableProps {
 const AdminTable: React.FC = () => {
   const { allAdmin, fetchUserLoading } = useSelector((state: RootState) => state.user);
 
-  // const totalPages = Math.ceil(totalRecord / pageSize);
-
   const dispatch = useAppDispatch();
   const [selectedAdmin, setSelectedAdmin] = useState<string[]>([]);
   const [editingAdminId, setEditingAdminId] = useState<string | null>(null);
   const [editingAdmin, setEditingAdmin] = useState<Map<string, Admin>>(new Map());
-  const [page, setPage] = useState(1);
   const [errors, setErrors] = useState<{
     businessName?: string,
     businessType?: string,
@@ -49,7 +54,6 @@ const AdminTable: React.FC = () => {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
-    // localStorage.setItem('adminPage', '1');
     dispatch(fetchAllAdminSlice({}));
   }, [dispatch]);
 
@@ -106,7 +110,7 @@ const AdminTable: React.FC = () => {
         email: editedAdmin.email,
         userId: userId,
       };
-      // await dispatch(updateAdminSlice(payload));
+      await dispatch(updateAdminSlice(payload));
       setEditingAdminId(null);
     }
 

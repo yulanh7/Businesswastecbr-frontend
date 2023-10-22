@@ -177,6 +177,9 @@ export const fetchAllUsers = (payload: fetchUsesProps) =>
 export const registerAdmin = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/admin`, payload);
 
+export const updateAdmin = (payload: updateUserProps) =>
+  makeRequest("put", `/api/admins/admin/update`, payload);
+
 export const registerUser = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/normal-user`, payload);
 
