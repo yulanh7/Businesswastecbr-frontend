@@ -40,6 +40,7 @@ function GroupLeaderConsolePage() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setSelectedFile(file);
+    setErrorMessage(null);
   };
   const handleResetForm = () => {
     dispatch(resetForm());
@@ -58,7 +59,6 @@ function GroupLeaderConsolePage() {
       dispatch(bulkAddNormalUsersSlice(selectedFile));
     }
   };
-
 
   const handleDeleteSelectedClick = async () => {
     if (!selectedUsers || selectedUsers.length === 0) {
