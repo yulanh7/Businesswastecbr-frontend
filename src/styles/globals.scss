@@ -61,6 +61,10 @@ img {
   background: $darkGreen;
   color: #fff;
   border: 1px solid $primaryColor;
+  &:hover{
+    background: #024b34;
+  color: #fff;
+  }
 
 }
 .btn.btn-secondary {

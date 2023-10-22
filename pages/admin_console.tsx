@@ -6,14 +6,23 @@ import AddGroupLeaderModule from '../src/components/AddGroupLeaderModule';
 import utilStyles from "../src/styles/utils.module.scss";
 import { Container, Button } from 'react-bootstrap';
 import AddAdminModule from '../src/components/AddAdminModule';
+import { useAppDispatch } from '../store';
+import { resetForm } from "../store/userSlice";
 
 function HomePage() {
+  const dispatch = useAppDispatch();
   const [showGLModal, setShowGLModal] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
 
-  const handleShowGLModal = () => setShowGLModal(true);
+  const handleShowGLModal = () => {
+    dispatch(resetForm());
+    setShowGLModal(true)
+  };
   const handleCloseGLModal = () => setShowGLModal(false);
-  const handleShowAdminModal = () => setShowAdminModal(true);
+  const handleShowAdminModal = () => {
+    dispatch(resetForm());
+    setShowAdminModal(true)
+  };
   const handleCloseAdminModal = () => setShowAdminModal(false);
 
   return (

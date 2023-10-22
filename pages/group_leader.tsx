@@ -31,7 +31,10 @@ function GroupLeaderConsolePage() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleShowModal = () => setShowModal(true);
+  const handleShowModal = () => {
+    dispatch(resetForm());
+    setShowModal(true)
+  };
   const handleCloseModal = () => setShowModal(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
