@@ -23,6 +23,7 @@ import {
   updateSelfDetail,
   contactUs,
   askAQuestion,
+  registerAdmin,
 } from "../api/api";
 import Router from "next/router";
 import {
@@ -334,6 +335,22 @@ export const registerGroupLeaderSlice =
       dispatch(submitUserFailure(error.message));
     }
   };
+export const registerAdminSlice =
+  (
+    payload: addUserProps
+  ): AppThunk<Promise<void>> => // Add <Promise<void>> to specify the return type
+  async (dispatch) => {
+    try {
+      dispatch(submitUserStart());
+      const { message } = await registerAdmin(payload);
+      dispatch(submitUserSuccess("Submit successfully"));
+      // const normalUserPage = localStorage.getItem("normalUserPage") || 1;
+      const response = await fetchAllAdmin({});
+      dispatch(fetchAllAdminSuccess(response));
+    } catch (error: any) {
+      dispatch(submitUserFailure(error.message));
+    }
+  };
 export const registerUserSlice =
   (
     payload: addUserProps
@@ -352,6 +369,7 @@ export const registerUserSlice =
       dispatch(submitUserFailure(error.message));
     }
   };
+
 export const updateUserSlice =
   (
     payload: updateUserProps

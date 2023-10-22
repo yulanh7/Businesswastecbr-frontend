@@ -174,6 +174,9 @@ export const fetchAllUsers = (payload: fetchUsesProps) =>
     `api/group-leaders/normal-users?page=${payload.page}&limit=${limit}&sortColumn=${payload.sortColumn}&sortDirection=${payload.sortDirection}`
   );
 
+export const registerAdmin = (payload: addUserProps) =>
+  makeRequest("post", `/api/users/register/admin`, payload);
+
 export const registerUser = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/normal-user`, payload);
 

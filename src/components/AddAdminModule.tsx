@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import { registerGroupLeaderSlice, resetForm } from "../../store/userSlice";
+import { registerAdminSlice, resetForm } from "../../store/userSlice";
 // import { UserData } from "../../ultility/interfaces";
 import { useAppDispatch, RootState } from '../../store';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ const defaultuserProps = {
   firstName: "",
   lastName: "",
   email: "",
+  userType: "Admin",
 }
 
 interface AddAdminModalProps {
@@ -72,7 +73,7 @@ function AddGroupLeaderModal({ show, onHide }: AddAdminModalProps) {
 
   const handleAddAdmin = async () => {
     if (validateForm()) {
-      // dispatch(registerGroupLeaderSlice(formData));
+      dispatch(registerAdminSlice(formData));
 
     }
   };
@@ -95,7 +96,7 @@ function AddGroupLeaderModal({ show, onHide }: AddAdminModalProps) {
   return (
     <Modal show={show} onHide={handleOnHide} size='lg'>
       <Modal.Header closeButton>
-        <Modal.Title>Add Group Leader</Modal.Title>
+        <Modal.Title>Add Admin</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
