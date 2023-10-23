@@ -135,7 +135,7 @@ export const updateGroupLeader = (payload: updateGroupLeaderProps) =>
   makeRequest("put", `/api/admins/group-leader/update`, payload);
 
 export const bulkDeleteGroupLeaders = (payload: any) =>
-  makeRequest("put", `/api/admins/users/bulk-delete`, payload);
+  makeRequest("put", `/api/admins/group-leader/bulk-delete`, payload);
 
 export const bulkResetPWGroupLeaders = (payload: any) =>
   makeRequest("post", `/api/admins/bulkSendNewPasswords`, payload);
