@@ -11,8 +11,7 @@ import {
 } from "../ultility/interfaces";
 import Router from "next/router";
 
-// const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_URL = "https://dev.training.actsmartbusiness.com.au:3045";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const api = axios.create({
   baseURL: API_URL,
 });
