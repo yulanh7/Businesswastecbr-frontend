@@ -118,7 +118,7 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
       </Form.Group>
       <ReCAPTCHA
         ref={recaptchaRef}
-        sitekey="6LcCy3MoAAAAAJPS_wxlFFPehLZXCT7WDeJN53Ca"
+        sitekey="6Lf2NMUoAAAAALXNSMVQLOgvP65xYaVDiCjtTqBx"
         onChange={handleRecaptchaChange}
         className={`form-control form-recaptcha ${formErrors.isRecaptchaVerified ? 'is-invalid' : ''}`}
 

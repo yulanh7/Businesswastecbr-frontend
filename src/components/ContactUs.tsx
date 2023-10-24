@@ -181,7 +181,7 @@ export default function ContactUs() {
                 </Col>
                 <ReCAPTCHA
                   ref={recaptchaRef}
-                  sitekey="6LcCy3MoAAAAAJPS_wxlFFPehLZXCT7WDeJN53Ca"
+                  sitekey="6Lf2NMUoAAAAALXNSMVQLOgvP65xYaVDiCjtTqBx"
                   onChange={handleRecaptchaChange}
                   className={`form-control form-recaptcha ${formErrors.isRecaptchaVerified ? 'is-invalid' : ''}`}
 
@@ -207,7 +207,7 @@ export default function ContactUs() {
         </Row>
 
         {/* <ReCAPTCHA
-        sitekey="6Le0ZpQnAAAAAOeIgiopQ3gPTwtVUR5mSmbQuPoz"
+        sitekey="6Lf2NMUoAAAAALXNSMVQLOgvP65xYaVDiCjtTqBx"
         onChange={handleRecaptchaChange}
         className={`form-control ${errors.isRecaptchaVerified ? 'is-invalid' : ''}`}
 
