@@ -510,7 +510,7 @@
 .pageBody {
   min-height: calc(100vh - 233px);
   transition: padding-top 0.3s ease-out;
-
+  flex-grow: 1;
 }
 
 
