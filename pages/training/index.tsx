@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import { showNotification } from "../../ultility/ultility";
 
 function TraininPage() {
   const { allStreams, fetchQuestionLoading } = useSelector((state: RootState) => state.question);
@@ -25,8 +26,12 @@ function TraininPage() {
       }
       dispatch(fetchAllStreamsSlice(payload))
       setuserInfo(userInfo)
+    } else {
+      showNotification("Please login. Your session is invalid or expired.");
+      router.push('/login');
     }
   }, [])
+
 
   useEffect(() => {
     if (allStreams && allStreams.length > 0) {
