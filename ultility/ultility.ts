@@ -236,18 +236,3 @@ export const scrollToSection = (sectioId: string) => {
     });
   }
 };
-
-
-export const showNotification = (message: any) => {
-  if ('Notification' in window) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        new Notification('Notification', {
-          body: message,
-        });
-      } else {
-        alert("Please login. Your session is invalid or expired.");
-      }
-    });
-  }
-};

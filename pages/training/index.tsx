@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { showNotification } from "../../ultility/ultility";
 
 function TraininPage() {
   const { allStreams, fetchQuestionLoading } = useSelector((state: RootState) => state.question);
@@ -16,6 +15,21 @@ function TraininPage() {
   const [userInfo, setuserInfo] = useState('');
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+
+  const showNotification = (message: any) => {
+    if ('Notification' in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          new Notification('Notification', {
+            body: message,
+          });
+        } else {
+          alert("Please log in to start training");
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
@@ -27,7 +41,7 @@ function TraininPage() {
       dispatch(fetchAllStreamsSlice(payload))
       setuserInfo(userInfo)
     } else {
-      showNotification("Please login. Your session is invalid or expired.");
+      showNotification("Please log in to start training.");
       router.push('/login');
     }
   }, [])
