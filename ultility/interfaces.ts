@@ -54,10 +54,6 @@ export interface addGroupLeaderProps {
   businessId?: string | null;
   businessDetails?: {
     businessName: string;
-    address: string;
-    suburb: string;
-    state: string;
-    postcode: string;
     businessType: string;
   };
 }

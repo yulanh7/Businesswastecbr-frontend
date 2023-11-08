@@ -12,10 +12,6 @@ const defaultuserProps = {
   userType: "",
   businessDetails: {
     businessName: "",
-    address: "",
-    suburb: "",
-    state: "",
-    postcode: "",
     businessType: ""
   }
 }
@@ -66,29 +62,7 @@ function AddGroupLeaderModal({ show, onHide }: AddGroupLeaderModalProps) {
       isValid = false;
     }
 
-    // Validating the address
-    if (formData.businessDetails.address.trim() === '') {
-      newFormErrors.businessDetails.address = 'Address is required';
-      isValid = false;
-    }
 
-    // Validating the suburb
-    if (formData.businessDetails.suburb.trim() === '') {
-      newFormErrors.businessDetails.suburb = 'Suburb is required';
-      isValid = false;
-    }
-
-    // Validating the state
-    if (formData.businessDetails.state.trim() === '') {
-      newFormErrors.businessDetails.state = 'State is required';
-      isValid = false;
-    }
-
-    // Validating the postcode
-    if (formData.businessDetails.postcode.trim() === '') {
-      newFormErrors.businessDetails.postcode = 'Postcode is required';
-      isValid = false;
-    }
 
     setFormErrors(newFormErrors);
     return isValid;
@@ -217,68 +191,6 @@ function AddGroupLeaderModal({ show, onHide }: AddGroupLeaderModalProps) {
                 />
                 {formErrors.businessDetails.businessType && <div className="invalid-feedback">{formErrors.businessDetails.businessType}</div>}
 
-              </Form.Group>
-            </Col>
-            <Col xs='12' sm='6'>
-              <Form.Group controlId="address">
-                <Form.Control
-                  type="text"
-                  placeholder='Address'
-                  name="businessDetails.address"   // This should be "businessDetails.address"
-                  value={formData.businessDetails.address}
-                  onChange={handleChange}
-                  className={formErrors.businessDetails.address && 'is-invalid'}
-                />
-                {formErrors.businessDetails.address && <div className="invalid-feedback">{formErrors.businessDetails.address}</div>}
-              </Form.Group>
-            </Col>
-            <Col xs='12' sm='6'>
-              <Form.Group controlId="suburb">
-                <Form.Control
-                  type="text"
-                  placeholder="Suburb"
-                  name='businessDetails.suburb'
-                  value={formData.businessDetails.suburb}
-                  onChange={handleChange}
-                  className={formErrors.businessDetails.suburb && 'is-invalid'}
-                />
-                {formErrors.businessDetails.suburb && <div className="invalid-feedback">{formErrors.businessDetails.suburb}</div>}
-              </Form.Group>
-            </Col>
-            <Col xs='12' sm='6'>
-              <Form.Group controlId="state">
-                <Form.Control
-                  as="select"
-                  name="businessDetails.state"
-                  value={formData.businessDetails.state}
-                  onChange={handleChange}
-                  className={formErrors.businessDetails.state && 'is-invalid'}
-                >
-                  <option value="">Select State</option>
-                  <option value="NSW">New South Wales</option>
-                  <option value="VIC">Victoria</option>
-                  <option value="QLD">Queensland</option>
-                  <option value="SA">South Australia</option>
-                  <option value="WA">Western Australia</option>
-                  <option value="TAS">Tasmania</option>
-                  <option value="ACT">Australian Capital Territory</option>
-                  <option value="NT">Northern Territory</option>
-                </Form.Control>
-                {formErrors.businessDetails.state && <div className="invalid-feedback">{formErrors.businessDetails.state}</div>}
-              </Form.Group>
-
-            </Col>
-            <Col xs='12' sm='6'>
-              <Form.Group controlId="postcode">
-                <Form.Control
-                  type="text"
-                  name="businessDetails.postcode"
-                  placeholder='Postcode'
-                  value={formData.businessDetails.postcode}
-                  onChange={handleChange}
-                  className={formErrors.businessDetails.postcode && 'is-invalid'}
-                />
-                {formErrors.businessDetails.postcode && <div className="invalid-feedback">{formErrors.businessDetails.postcode}</div>}
               </Form.Group>
             </Col>
           </Row>
