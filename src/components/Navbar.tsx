@@ -65,16 +65,16 @@ const ResponsiveNavbar: React.FC = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Link className={isActive('/')} href="/">
-            HOME
+            Home
           </Nav.Link>
           {userInfo &&
             <Nav.Link className={isActive('/training')} href="/training">
-              TRAINING
+              Training
             </Nav.Link>
           }
           {userInfo && userInfo.userType === 'Admin' &&
             <Nav.Link className={isActive('/admin_console')} href="/admin_console">
-              ADMIN CONSOLE
+              Admin Console
             </Nav.Link>
           }
           {userInfo && userInfo.userType === "Group Leader" &&

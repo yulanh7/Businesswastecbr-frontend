@@ -52,31 +52,29 @@ export default function Layout({ children, subTitle, topSubTitle, loading = fals
         }
         <>
           <div className={isScrolled ? `${styles.headerContainer} ${styles.fixedHeader}` : styles.headerContainer} id="header">
-            <Container className={styles.headerTop}>
-              <div className={utilStyles.logBox}>
+            <div className={styles.headerTop}>
+              {/* <Row>
+            <Col xs='12' sm='6'>
+              </Col>
+              </Row> */}
+              <div className={styles.headerTopLeft}>
                 <a target="_blank" rel="noopener noreferrer" href="https://www.climatechoices.act.gov.au/">
-                  <div className={utilStyles.logTextBox}>
 
-                    <div className={utilStyles.first}>
-                      Everyday
-                    </div>
-                    <div className={utilStyles.second}>
-                      climate
-                    </div>
-                    <div className={utilStyles.third}>
-                      choices
-                    </div>
-                  </div>
-                  {/* <Image src="/images/Logo-ClimateChoices.svg" alt="logo" width={100} height={50} className={styles.logo} /> */}
+                  <Image src="/images/ECC-Logo.svg" alt="logo" width={100} height={80} className={styles.siteLogo} priority={true}
+                  />                  {/* <Image src="/images/Logo-ClimateChoices.svg" alt="logo" width={100} height={50} className={styles.logo} /> */}
                 </a>
               </div>
-              <DynamicResponsiveNavbar />
-              <a target='_blank' href='https://www.act.gov.au/'>
+              <div className={styles.headerTopCenter}>
+                <DynamicResponsiveNavbar />
+              </div>
+              <div className={styles.headerTopRight}>
+                <a target='_blank' href='https://www.act.gov.au/'>
 
-                <Image src="/images/ACTGov_inline_rev.svg" alt="logo" width={100} height={50} className={styles.logo} priority={true}
-                />
-              </a>
-            </Container>
+                  <Image src="/images/ACTGov_inline_black.svg" alt="logo" width={150} height={80} className={styles.actLogo} priority={true}
+                  />
+                </a>
+              </div>
+            </div>
           </div>
           <div className={isScrolled ? styles.headerPlaceholder : ''}></div>
 

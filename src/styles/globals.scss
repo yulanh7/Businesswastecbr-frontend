@@ -1,12 +1,12 @@
 @import 'colors';
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;600;700&display=swap');
 
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   font-size: 18px;
 }
@@ -96,35 +96,33 @@ img {
 }
 
 
-nav {
-  a {
-    color: #fff!important;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  a.active{
-    border-bottom: 2px solid #fff;
-  }
-  
+nav.navbar.navbar-expand-lg{
+  justify-content: center;
   a.nav-link{
+    color: #000!important;
+    text-transform: capitalize!important;
+    font-family:  "Helvetica Neue" !important;
     border-bottom: 2px solid transparent;
-    padding:5px 0 !important;
+    padding:0 !important;
     margin: 20px;
+    font-weight: 500;
+    padding: 0;
+    margin: 20px;
+    padding-bottom: 10px;
   }
   a.nav-link:hover{
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #000;
   }
   a.nav-link.active{
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #000;
   }
   a:hover{
     text-decoration: none!important;
   }
-  
-  .navbar-expand-lg .navbar-nav .nav-link {
-    padding: 0;
-    margin: 20px;
-    padding-bottom: 10px;
+ 
+
+  .navbar-collapse {
+    flex-grow: inherit;
   }
   .nav-dropdown {
     button {

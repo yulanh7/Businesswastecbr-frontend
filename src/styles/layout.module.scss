@@ -12,10 +12,7 @@
   margin: 30px auto;
 }
 
-.headerContainer {
-  background: $primaryColor;
-  padding: 10px;
-}
+
 .fixedHeader {
   transition: all 0.3s ease-in-out;
   position: fixed;
@@ -27,12 +24,55 @@
 }
 .headerTop {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  // align-items: center;
+  // justify-content: space-between;
   width: 100%;
   position: relative;
+  background: $primaryColor;
+  .headerTopLeft{
+    flex-grow: 1;
+    padding: 20px 40px;
+    background: $primaryColor;
+    @media (max-width:767px ) {
+      padding: 20px;
+    }
+    .siteLogo {
+      @media (max-width:767px ) {
+        width: 70px;
+      }
+    }
+  }
+  .headerTopCenter{
+    flex-grow: 3;
+    background: $creamBackground;
+    padding: 10px 40px;
+    text-align: center;
+    @media (max-width:767px ) {
+      padding: 20px;
+    }
+   
+  }
+  .headerTopRight{
+    flex-grow: 1;
+    background: $paleGrayBackground;
+    padding: 20px 40px;
+    @media (max-width:767px ) {
+      padding: 20px;
+    }
+    a {
+      display: flex;
+      justify-content: center;
+    }
+    .actLogo {
+      @media (max-width:767px ) {
+        width: 100px;
+      }
+    }
+  }
 
 }
+
+
 /* styles/layout.module.scss */
 .headerPlaceholder {
   height: 130px;  // adjust based on your header height

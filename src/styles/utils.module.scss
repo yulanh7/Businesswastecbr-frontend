@@ -478,34 +478,6 @@
   }
 }
 
-.logBox {
-  a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 25px;
-    line-height: 28px;
-    .logTextBox {
-      // border: 1px solid #fff;
-      padding: 5px;
-      .first{
-        font-weight: 300;
-        font-style: italic;
-      }
-      @media (max-width:767px) {
-
-        // border: 1px solid #fff;
-        font-size: 18px;
-        line-height: 20px;
-        padding: 10px;
-        .first{
-          font-weight: 300;
-          font-style: italic;
-        } 
-      }
-      
-    }
-  }
-}
 
 .pageBody {
   min-height: calc(100vh - 233px);
