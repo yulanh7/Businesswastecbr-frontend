@@ -82,10 +82,14 @@ export default function Layout({ children, subTitle, topSubTitle, loading = fals
 
           <div className={utilStyles.pageBody}>
 
-            <div className={`${utilStyles.text} ${utilStyles.textCenter}`}>{topSubTitle}</div>
-            <div className={`${utilStyles.textMd} ${utilStyles.textCenter}`}>
-              {subTitle}
-            </div>
+            {topSubTitle && <div className={`${utilStyles.text} ${utilStyles.textCenter}`}>{topSubTitle}</div>}
+            {
+              subTitle &&
+
+              <div className={`${utilStyles.textMd} ${utilStyles.textCenter}`}>
+                {subTitle}
+              </div>
+            }
             {children}
           </div>
           <div className={`${styles.footerContainer} ${utilStyles.pT10px}`}>
