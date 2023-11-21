@@ -8,7 +8,7 @@ const DynamicReactPlayer = dynamic(() => import('./VideoPlayer'), {
 });
 
 interface TopBannerProps {
-  children: ReactNode;
+  children?: ReactNode;
   screen: string;
 }
 

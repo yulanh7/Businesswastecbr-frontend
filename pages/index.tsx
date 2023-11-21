@@ -42,8 +42,8 @@ function HomePage() {
 
     <Layout loading={videoLoading}>
       <Banner screen="md">
-        <h5>Online Interactive Recycling Training
-        </h5>
+        <h1>Online Interactive Recycling Training
+        </h1>
         <p className={utilsStyles.text}>
           {`Let's`} get started by watching the introductory <a onClick={handlePlayVideo}><b>video</b></a>.
         </p>
