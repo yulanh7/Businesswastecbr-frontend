@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import utilStyles from '../../src/styles/utils.module.scss'
 import { loginSlice } from "../../store/userSlice";
@@ -74,6 +74,14 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
   const handleFocus = () => {
     setFormErrors(defaultFormProps);
   }
+
+  useEffect(() => {
+    console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+    if (process.env.NODE_ENV === 'development') {
+      // For localhost, set reCAPTCHA as verified automatically
+      setIsRecaptchaVerified(true);
+    }
+  }, []);
 
   const handleRecaptchaChange = (token: string | null) => {
     if (token) {

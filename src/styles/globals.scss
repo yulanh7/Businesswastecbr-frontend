@@ -133,16 +133,17 @@ nav.navbar.navbar-expand-lg{
       background: none;
       border: none;
       padding: 0;
-      text-transform: uppercase;
+      text-transform: capitalize;
       border-bottom: 2px solid transparent;
-      padding:5px 0 !important;
+      padding: 0 !important;
       margin: 20px;
       border-radius: 0;
+      color: #000;
     }
     button:hover {
       background: none;
-      border-bottom: 2px solid #fff;
-
+      border-bottom: 2px solid $primaryColor;
+      color: $primaryColor;
     }
     button::after {
       display: none;
@@ -152,7 +153,7 @@ nav.navbar.navbar-expand-lg{
       border-color: #fff;
     }
     .dropdown-menu {
-      background-color: $primaryColor;
+      background-color: $creamBackground;
       top: 60px;
       left: 20px;
       padding: 10px;
@@ -165,7 +166,8 @@ nav.navbar.navbar-expand-lg{
     }
     .dropdown-item:hover {
       background: none!important;
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid $primaryColor;
+      color: $primaryColor;
     }
     .btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show{
       background: none;
