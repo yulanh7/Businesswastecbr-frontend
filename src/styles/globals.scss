@@ -1,10 +1,12 @@
 @import 'colors';
+// @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;600;700&display=swap');
+
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Helvetica Neue', sans-serif!important;
   line-height: 1.6;
   font-size: 18px;
 }
@@ -107,12 +109,16 @@ nav.navbar.navbar-expand-lg{
     padding: 0;
     margin: 20px;
     padding-bottom: 10px;
+    font-size: 1.1em;
   }
   a.nav-link:hover{
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid $primaryColor;
+    color: $primaryColor!important;
   }
   a.nav-link.active{
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid $primaryColor;
+    color: $primaryColor!important;
+
   }
   a:hover{
     text-decoration: none!important;

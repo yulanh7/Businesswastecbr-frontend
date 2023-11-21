@@ -341,8 +341,12 @@
     // animation: fadeinfromdown 1.5s forwards;
     z-index: 3; // This will ensure the innerContainer and its children are above the overlay
     padding: 10px;
-    h5 {
+    h1 {
       color: white;
+      font-size: 1.5em;
+      @media (max-width:767px) {
+        font-size: 1.1em;
+      }
     }
     p{
       margin: 10px 0 0;

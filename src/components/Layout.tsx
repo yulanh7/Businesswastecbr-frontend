@@ -40,12 +40,13 @@ export default function Layout({ children, subTitle, topSubTitle, loading = fals
   return (
     <div>
       <Head>
-        {/* <link rel="icon" href="/favicon.png" /> */}
+        <link rel="icon" href="/images/favicon.ico" />
         <title>Sustainable Business Program recycling training</title>
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
         />
+        <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;600;700&display=swap" rel="stylesheet" type="text/css"></link>
       </Head>
       <main className={styles.pageContainer}>
         {loading &&
