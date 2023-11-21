@@ -13,7 +13,7 @@ const DynamicResponsiveNavbar = dynamic(() => import('./Navbar'), {
 });
 
 interface LayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
   subTitle?: string;
   topSubTitle?: string;
   loading?: boolean;
@@ -41,6 +41,7 @@ export default function Layout({ children, subTitle, topSubTitle, loading = fals
     <div>
       <Head>
         {/* <link rel="icon" href="/favicon.png" /> */}
+        <title>Sustainable Business Program recycling training</title>
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
