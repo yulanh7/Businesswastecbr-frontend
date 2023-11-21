@@ -19,24 +19,21 @@ interface ResetPasswordPros {
 const ResetPassword: React.FC<ResetPasswordPros> = ({ handleBackToLogin, token, submitUserError, submitUserMessage, submitUserLoading }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setConfirmShowPassword] = useState(false);
-
   const dispatch = useAppDispatch();
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Basic password format check
-    if (!/^.{8,}$/.test(password)) {
-      setPasswordError('Password must be at least 8 characters long.');
+
+    if (!/^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/.test(password)) {
+      setPasswordError('Password must be at least 8 characters long and contain at least one number and one letter');
       return;
     }
     // Confirm password validation
     if (password !== confirmPassword) {
-      setConfirmPasswordError('Passwords do not match.');
+      setPasswordError('Passwords do not match.');
       return;
     }
     dispatch(resetPasswordSlice({ token, password: hashPassword(password) }));
@@ -57,7 +54,6 @@ const ResetPassword: React.FC<ResetPasswordPros> = ({ handleBackToLogin, token, 
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </InputGroup.Text>
         </InputGroup>
-        {passwordError && <div className="error-message">{passwordError}</div>}
       </Form.Group>
       <Form.Group>
         <InputGroup>
@@ -72,7 +68,9 @@ const ResetPassword: React.FC<ResetPasswordPros> = ({ handleBackToLogin, token, 
             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
           </InputGroup.Text>
         </InputGroup>
-        {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
+        {passwordError && <div className="error-message">*{passwordError}</div>}
+        {!passwordError && <div className="password-message">*Password must be at least 8 characters long and contain at least one number and one letter</div>}
+        {/* {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>} */}
         {submitUserMessage && <div className="success-message">{submitUserMessage}</div>}
         {submitUserError && <div className="error-message">{submitUserError}</div>}
       </Form.Group>

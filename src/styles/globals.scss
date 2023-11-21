@@ -402,13 +402,20 @@ Table {
   }
 }
 
+.password-message {
+  margin: -5px 0 10px;
+  // font-weight: 300;
+  font-size: 0.9em;
+}
 .success-message {
   padding: 0 5px;
   color: green;
+  font-size: 0.9em;
 }
 .error-message {
   padding: 0 5px;
   color: red;
+  font-size: 0.9em;
 }
 
 .input-group-text {

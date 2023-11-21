@@ -5,6 +5,7 @@ import { RootState, useAppDispatch } from '../../store';
 import { useSelector } from 'react-redux';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { hashPassword } from "../../ultility/ultility";
+import utilStyles from '../../src/styles/utils.module.scss';
 
 
 type VisibilityKey = 'currentPassword' | 'newPassword' | 'confirmPassword';
@@ -51,8 +52,8 @@ const ChangePasswordForm: React.FC = () => {
   const handleSubmitChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!/^.{8,}$/.test(formData.newPassword)) {
-      setPasswordError('Password must be at least 8 characters long');
+    if (!/^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/.test(formData.newPassword)) {
+      setPasswordError('Password must be at least 8 characters long and contain at least one number and one letter');
       return;
     }
 
@@ -92,13 +93,14 @@ const ChangePasswordForm: React.FC = () => {
       {renderInput('currentPassword', 'Enter current password')}
       {renderInput('newPassword', 'Enter new password')}
       {renderInput('confirmPassword', 'Confirm new password')}
-      {passwordError && <div className="error-message">{passwordError}</div>}
+      {passwordError && <div className="error-message">*{passwordError}</div>}
+      {!passwordError && <div className="password-message">*Password must be at least 8 characters long and contain at least one number and one letter</div>}
       {messages.success && <div className="success-message">{messages.success}</div>}
       {messages.failure && <div className="error-message">{messages.failure}</div>}
       <Button variant="primary" type="submit">
         Change password
       </Button>
-    </Form>
+    </Form >
   );
 };
 
