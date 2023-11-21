@@ -45,7 +45,7 @@ function DropdownAccount({ userInfo, handleLogout }: DropdownAccountProps) {
             <Dropdown.Menu>
               <Dropdown.Item href="/my_account?para=profile">Profile</Dropdown.Item>
 
-              <Dropdown.Item href="/my_account?para=changePassword">Change Password</Dropdown.Item>
+              <Dropdown.Item href="/my_account?para=changePassword">Change password</Dropdown.Item>
               <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

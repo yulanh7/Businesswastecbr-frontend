@@ -96,7 +96,7 @@ const ChangePasswordForm: React.FC = () => {
       {messages.success && <div className="success-message">{messages.success}</div>}
       {messages.failure && <div className="error-message">{messages.failure}</div>}
       <Button variant="primary" type="submit">
-        Change Password
+        Change password
       </Button>
     </Form>
   );

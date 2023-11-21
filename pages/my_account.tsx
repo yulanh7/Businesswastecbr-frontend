@@ -106,7 +106,7 @@ function HomePage() {
                   <Button onClick={(e) => handleSelect(e, 'profile')} className={activeSection == 'profile' ? 'active' : ''}>Profile</Button>
                 </div>
                 <div>
-                  <Button onClick={(e) => handleSelect(e, 'changePassword')} className={activeSection == 'changePassword' ? 'active' : ''}>Change Password</Button>
+                  <Button onClick={(e) => handleSelect(e, 'changePassword')} className={activeSection == 'changePassword' ? 'active' : ''}>Change password</Button>
                 </div>
                 <div>
                   <Button onClick={(e) => handleLogout()}>Log out</Button>
@@ -121,7 +121,7 @@ function HomePage() {
                 )}
                 {activeSection == "changePassword" && (
                   <>
-                    <h5 className='section-title'>Change Password</h5>
+                    <h5 className='section-title'>Change password</h5>
                     <ChangePasswordForm />
                   </>
                 )}

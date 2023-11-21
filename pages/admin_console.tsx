@@ -34,7 +34,7 @@ function HomePage() {
           The group leader is your main contact person at the business. Enter their details. The group leader will automatically receive a link to logon to their account,
           and will be able to add staff singly or in bulk. The reset password button will generate and send the link again if required.
         </p>
-        <Button onClick={handleShowGLModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add Group Leader</Button>
+        <Button onClick={handleShowGLModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add group leader</Button>
 
         <GroupLeaderTable />
         <div className={utilStyles.pB50px}></div>
@@ -42,7 +42,7 @@ function HomePage() {
         <p className={utilStyles.sectionSubTitleCenter}>
           Add or delete ACT Government Sustainable Business Program team members to enable them access to the Admin console
         </p>
-        <Button onClick={handleShowAdminModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add Admin</Button>
+        <Button onClick={handleShowAdminModal} className={`${utilStyles.mB20px} ${utilStyles.floatR}`}>Add admin</Button>
         <AdminTable />
         <AddGroupLeaderModule show={showGLModal} onHide={handleCloseGLModal} />
         <AddAdminModule show={showAdminModal} onHide={handleCloseAdminModal} />

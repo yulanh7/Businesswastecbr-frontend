@@ -66,7 +66,7 @@ function HomePage() {
             Once you have completed the training, you will receive confirmation and your organisation will be notified of your success.
           </p>
           <Link href="/training">
-            <Button>Start Training</Button>
+            <Button>Start training</Button>
           </Link>
         </div>
       </div>

@@ -42,7 +42,7 @@ const ResetPassword: React.FC<ResetPasswordPros> = ({ handleBackToLogin, submitU
         </div>
         <div className={utilStyles.actionContainer}>
           <Button variant="link" onClick={handleBackToLogin} className="back-link">
-            <FaArrowLeft /> Back to Login
+            <FaArrowLeft /> Back to login
           </Button>
           <Button variant="primary" type="submit" disabled={submitUserLoading}>
             {submitUserLoading ? "Submitting..." : "Submit"}

@@ -100,7 +100,7 @@ const StreamPage: React.FC<StreamPageProps> = ({ currentStream }) => {
         <Row className={`${utilStyles.mdRow} ${utilStyles.flexColCenter}`}>
           <h3 className={`${utilStyles.textCenter} ${utilStyles.pB20px}`}>{currentStream?.title}</h3>
           {showQuestionBtn && questionByStream && questionByStream.hasQuestionnaire && !showQuestion && (
-            <Button onClick={handleShowQuestion} className={utilStyles.questionBtn}>Answer Questions </Button>
+            <Button onClick={handleShowQuestion} className={utilStyles.questionBtn}>Answer questions </Button>
           )}
 
 

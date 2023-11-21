@@ -120,7 +120,7 @@ function AddGroupLeaderModal({ show, onHide }: AddGroupLeaderModalProps) {
   return (
     <Modal show={show} onHide={handleOnHide} size='lg'>
       <Modal.Header closeButton>
-        <Modal.Title>Add Group Leader</Modal.Title>
+        <Modal.Title>Add group leader</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

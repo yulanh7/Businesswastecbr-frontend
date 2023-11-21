@@ -189,7 +189,7 @@ const GroupLeaderTable: React.FC = () => {
         <Button variant="danger" onClick={handleDeleteSelectedClick}>
           Delete
         </Button>
-        <Button variant="warning" onClick={() => handleResetPWSelectedClick()}>Reset Password</Button>
+        <Button variant="warning" onClick={() => handleResetPWSelectedClick()}>Reset password</Button>
       </div>
       <Table striped bordered hover>
         <thead>

@@ -69,8 +69,8 @@ const Question: React.FC<QuestionProps> = ({
           : [selectedOption]
       }));
     }
-    setShowTryAgain(false); // Add this line to hide the "Try Again" button and show the "Submit" button when an option is clicked
-    setIsSubmitted(false); // Add this line to hide the "Try Again" button and show the "Submit" button when an option is clicked
+    setShowTryAgain(false); // Add this line to hide the "Try again" button and show the "Submit" button when an option is clicked
+    setIsSubmitted(false); // Add this line to hide the "Try again" button and show the "Submit" button when an option is clicked
   }, []);
 
 
@@ -183,7 +183,7 @@ const Question: React.FC<QuestionProps> = ({
             id="question-submit"
             disabled={submitQuestionLoading}
           >
-            {submitQuestionLoading ? "Submitting..." : "Submit Answers"}
+            {submitQuestionLoading ? "Submitting..." : "Submit answers"}
           </Button>
         )}
         {showTryAgain && !answerIsCorrect && (
@@ -192,7 +192,7 @@ const Question: React.FC<QuestionProps> = ({
             className={utilStyles.mT10px}
             id="try-again-button"
           >
-            Try Again
+            Try again
           </Button>
         )}
 

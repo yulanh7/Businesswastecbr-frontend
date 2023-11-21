@@ -96,7 +96,7 @@ function AddGroupLeaderModal({ show, onHide }: AddAdminModalProps) {
   return (
     <Modal show={show} onHide={handleOnHide} size='lg'>
       <Modal.Header closeButton>
-        <Modal.Title>Add Admin</Modal.Title>
+        <Modal.Title>Add admin</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

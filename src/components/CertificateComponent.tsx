@@ -43,7 +43,7 @@ const CertificateComponent = () => {
           <div className={utilStyles.textCenter}>
             <h5 className={utilStyles.inner}>You have not passed the quiz</h5>
             <Link href="/training">
-              <Button >Go To Training</Button>
+              <Button >Go to training</Button>
             </Link>
           </div>
         )

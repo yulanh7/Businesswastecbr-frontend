@@ -121,7 +121,7 @@ function TraininPage() {
                       <Image src={getIcon(item.streamName)} alt="logo" width={100} height={50} />
                     </div> */}
                         <div className='stream-title'>{item.streamTitle}</div>
-                        {/* <Button>Start Training</Button> */}
+                        {/* <Button>Start training</Button> */}
                       </div>
                     </Link>
                   </Col>))}

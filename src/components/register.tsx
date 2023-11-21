@@ -259,7 +259,7 @@ export default function RegisterComponent() {
             type="submit"
           // className={utilStyles.button}
           >
-            SUBMIT
+            Submit
           </Button>
         </div>
       </form>

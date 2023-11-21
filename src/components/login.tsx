@@ -141,7 +141,7 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
           variant="link"
           onClick={() => handleActiveSection && handleActiveSection('forgetPassword')}
           className="back-link">
-          Forgot Password?
+          Forgot password?
         </Button>
       </div>
     </Form>
