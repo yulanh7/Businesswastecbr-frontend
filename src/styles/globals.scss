@@ -537,6 +537,12 @@ button.btn.btn-primary:hover {
 }
 .stream-question-container {
   position: relative;
+  .green-icon {
+    color: $secondaryColor;
+    margin-left: 10px;
+    // padding: 2px;
+    // border: 1px solid $secondaryColor;
+  }
 }
 .correct-icon-xlg {
   position: absolute;
