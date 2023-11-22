@@ -5,7 +5,7 @@ import { submitQuestionSlice, resetQuestionMessage } from "../../store/questionS
 import utilStyles from '../styles/utils.module.scss';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTimes, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const defaultMessage = {
   text: null,
@@ -126,7 +126,9 @@ const Question: React.FC<QuestionProps> = ({
                   <div key={option}>
                     <label
                       className='question-input-box'
-
+                      style={isSubmitted ? {
+                        background: question.correctAnswers.includes(option) ? 'green' : ''
+                      } : {}}
                     >
                       <Form.Check
                         disabled={isSubmitted}
@@ -143,10 +145,7 @@ const Question: React.FC<QuestionProps> = ({
 
                       />
                       {option}
-                      {
-                        isSubmitted && question.correctAnswers.includes(option) &&
-                        <FontAwesomeIcon icon={faThumbsUp} className="green-icon" />
-                      }
+
                     </label>
                   </div>
                 ))}
