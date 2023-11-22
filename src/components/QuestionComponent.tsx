@@ -126,9 +126,6 @@ const Question: React.FC<QuestionProps> = ({
                   <div key={option}>
                     <label
                       className='question-input-box'
-                      style={isSubmitted ? {
-                        background: question.correctAnswers.includes(option) ? 'green' : ''
-                      } : {}}
                     >
                       <Form.Check
                         disabled={isSubmitted}
@@ -144,7 +141,15 @@ const Question: React.FC<QuestionProps> = ({
                         onChange={() => handleOptionSelect(question._id, option, question.type)}
 
                       />
-                      {option}
+                      <span
+                        style={isSubmitted ? {
+                          background: question.correctAnswers.includes(option) ? '#2db44b' : ''
+
+                        } : {}}
+                      >
+
+                        {option}
+                      </span>
 
                     </label>
                   </div>
