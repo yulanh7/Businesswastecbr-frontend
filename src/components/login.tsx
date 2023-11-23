@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../store';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { hashPassword } from "../../ultility/ultility";
 import ReCAPTCHA, { ReCAPTCHA as ReCAPTCHAType } from 'react-google-recaptcha';
+import { resetForm } from "../../store/userSlice";
 
 type ActiveSection = 'login' | 'forgetPassword' | 'resetPassword';
 const defaultFormProps = {
@@ -90,6 +91,16 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
       setIsRecaptchaVerified(false);
     }
   };
+
+  const handleActiveLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    if (handleActiveSection) {
+      dispatch(resetForm());
+      handleActiveSection('forgetPassword')
+    }
+  }
+
   return (
     <Form onSubmit={handleLogin}>
       <Form.Group controlId="email">
@@ -139,7 +150,7 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
         <Button variant="primary" type="submit" disabled={submitUserLoading}>{submitUserLoading ? "Submitting..." : "Login"}</Button>
         <Button
           variant="link"
-          onClick={() => handleActiveSection && handleActiveSection('forgetPassword')}
+          onClick={handleActiveLogin}
           className="back-link">
           Forgot password?
         </Button>
