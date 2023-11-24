@@ -1,0 +1,36 @@
+@mixin animationEffect($name) {
+  animation: $name 1.5s 1s forwards;
+}
+
+@keyframes fadeinfromdown {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomin {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(100%);
+  }
+}
+
+@keyframes fadeInRadial {
+  from {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
