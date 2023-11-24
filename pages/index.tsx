@@ -6,7 +6,6 @@ import utilsStyles from "../src/styles/utils.module.scss";
 import { Button } from "react-bootstrap";
 import dynamic from 'next/dynamic';
 import Link from "next/link";
-import Banner from "../src/components/Banner";
 
 const DynamicReactPlayer = dynamic(() => import('../src/components/VideoPlayer'), {
   ssr: false, // Render only on the client side
@@ -41,13 +40,6 @@ function HomePage() {
   return (
 
     <Layout loading={videoLoading}>
-      <Banner screen="md">
-        <h1>Online Interactive Recycling Training
-        </h1>
-        <p className={utilsStyles.text}>
-          {`Let's`} get started by watching the introductory <a onClick={handlePlayVideo}><b>video</b></a>.
-        </p>
-      </Banner>
       <div className={pageStyles.homeContainer} id="home">
         <div id="home-video" className={pageStyles.aboutUsContainer}>
           <DynamicReactPlayer

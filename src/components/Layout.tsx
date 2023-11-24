@@ -67,6 +67,8 @@ export default function Layout({ children, subTitle, topSubTitle, loading = fals
                 </a>
               </div>
               <div className={styles.headerTopCenter}>
+                <h1>Online Interactive Recycling Training
+                </h1>
                 <DynamicResponsiveNavbar />
               </div>
               <div className={styles.headerTopRight}>

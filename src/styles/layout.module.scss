@@ -1,4 +1,6 @@
 @import 'colors';
+@import 'utils';
+
 
 .container {
   max-width: 1024px;
@@ -30,11 +32,14 @@
   position: relative;
   background: $primaryColor;
   .headerTopLeft{
-    flex-grow: 1;
+    width: 18%;
     padding: 20px 40px;
     background: $primaryColor;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
     @media (max-width:767px ) {
-      padding: 20px;
+      padding: 10px;
     }
     .siteLogo {
       @media (max-width:767px ) {
@@ -43,21 +48,35 @@
     }
   }
   .headerTopCenter{
-    flex-grow: 3;
+    width: 66%;
     background: $creamBackground;
-    padding: 10px 40px;
+    padding: 10px;
     text-align: center;
     @media (max-width:767px ) {
-      padding: 20px;
+      padding: 10px;
+    }
+    h1 {
+      color: #333;
+      font-size: 2em;
+      font-weight: 600;
+      transform: scale(0);
+      @include animationEffect(zoomin);
+      margin: 10px 0 0;
+      @media (max-width:767px) {
+        font-size: 1.1em;
+      }
     }
    
   }
   .headerTopRight{
-    flex-grow: 1;
+    width: 18%;
     background: $paleGrayBackground;
     padding: 20px 40px;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
     @media (max-width:767px ) {
-      padding: 20px;
+      padding: 10px;
     }
     a {
       display: flex;
