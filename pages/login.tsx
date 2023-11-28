@@ -32,7 +32,7 @@ const LoginPage: React.FC = () => {
     const wasReloaded = performance.navigation.type === performance.navigation.TYPE_RELOAD;
     if (wasReloaded) {
       // If the page was reloaded, use the section stored in localStorage
-      const storedSection = localStorage.getItem('accountActiveSection');
+      const storedSection = localStorage.getItem('loginActiveSection');
       if (storedSection) {
         setActiveSection(storedSection as ActiveSection);
       }

@@ -97,7 +97,8 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
 
     if (handleActiveSection) {
       dispatch(resetForm());
-      handleActiveSection('forgetPassword')
+      handleActiveSection('forgetPassword');
+      localStorage.setItem('loginActiveSection', "forgetPassword");
     }
   }
 
