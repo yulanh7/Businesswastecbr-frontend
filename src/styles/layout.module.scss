@@ -24,6 +24,7 @@
   z-index: 1000; // Ensures navbar stays above other content
   // background-color: #ffffff; // Assuming you want a white background; adjust as needed
 }
+
 .headerTop {
   display: flex;
   // align-items: center;
@@ -31,59 +32,70 @@
   width: 100%;
   position: relative;
   background: $primaryColor;
-  .headerTopLeft{
+
+  .headerTopLeft {
     width: 18%;
     padding: 20px 40px;
     background: $primaryColor;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
-    @media (max-width:767px ) {
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width:767px) {
       padding: 10px;
     }
+
     .siteLogo {
-      @media (max-width:767px ) {
+      @media (max-width:767px) {
         width: 70px;
       }
     }
   }
-  .headerTopCenter{
+
+  .headerTopCenter {
     width: 66%;
     background: $creamBackground;
     padding: 10px;
     text-align: center;
-    @media (max-width:767px ) {
+
+    @media (max-width:767px) {
       padding: 10px;
     }
+
     h1 {
       color: #333;
       font-size: 2em;
       font-weight: 600;
-      transform: scale(0);
-      @include animationEffect(zoomin);
+      // transform: scale(0);
+      // @include animationEffect(zoomin);
       margin: 10px 0 0;
+
       @media (max-width:767px) {
         font-size: 1.1em;
       }
     }
-   
+
   }
-  .headerTopRight{
+
+  .headerTopRight {
     width: 18%;
     background: $paleGrayBackground;
     padding: 20px 40px;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
-    @media (max-width:767px ) {
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width:767px) {
       padding: 10px;
     }
+
     a {
       display: flex;
       justify-content: center;
     }
+
     .actLogo {
-      @media (max-width:767px ) {
+      @media (max-width:767px) {
         width: 100px;
       }
     }
@@ -94,7 +106,7 @@
 
 /* styles/layout.module.scss */
 .headerPlaceholder {
-  height: 130px;  // adjust based on your header height
+  height: 130px; // adjust based on your header height
   visibility: hidden;
 }
 
@@ -116,7 +128,7 @@
   color: #000;
   border-top: 1px solid #ccc;
   padding: 10px 0;
-  
+
   // position: absolute;
   // bottom: 0;
   // width: 100%;
@@ -128,7 +140,7 @@
 }
 
 @media (max-width:767px) {
- 
+
   .logo {
     width: 120px;
   }
@@ -141,7 +153,9 @@
     width: 100%;
   }
 }
+
 @media (max-width:450px) {
+
   // .headerTop {
   //   flex-direction: column;
   // }
