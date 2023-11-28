@@ -142,10 +142,7 @@ const Question: React.FC<QuestionProps> = ({
 
                       />
                       <span
-                        style={isSubmitted ? {
-                          background: question.correctAnswers.includes(option) ? '#2db44b' : ''
-
-                        } : {}}
+                        className={isSubmitted && question.correctAnswers.includes(option) ? "correct-answer-active" : ''}
                       >
 
                         {option}

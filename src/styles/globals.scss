@@ -554,6 +554,10 @@ button.btn.btn-primary:hover {
     // padding: 2px;
     // border: 1px solid $secondaryColor;
   }
+  .correct-answer-active {
+    background: #59ff7e;
+    padding: 1px 5px;
+  }
 }
 .correct-icon-xlg {
   position: absolute;
