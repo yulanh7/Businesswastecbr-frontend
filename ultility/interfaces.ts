@@ -82,7 +82,7 @@ export interface updateUserProps {
 export interface updateSelfDetailProps {
   firstName: string;
   lastName: string;
-  email: string;
+  // email: string;
 }
 export interface contactUsProps {
   name: string;

@@ -9,7 +9,7 @@ import { fetchSelfDetailSlice, updateSelfDetailSlice, resetForm } from "../../st
 const defaultuserProps = {
   firstName: '',
   lastName: '',
-  email: '',
+  // email: '',
 }
 
 export default function ProfileComponent() {
@@ -43,13 +43,13 @@ export default function ProfileComponent() {
     }
 
     // Validating the email
-    if (formData.email.trim() === '') {
-      newFormErrors.email = 'Email is required';
-      isValid = false;
-    } else if (!isValidEmail(formData.email.trim())) {
-      newFormErrors.email = 'Invalid email format';
-      isValid = false;
-    }
+    // if (formData.email.trim() === '') {
+    //   newFormErrors.email = 'Email is required';
+    //   isValid = false;
+    // } else if (!isValidEmail(formData.email.trim())) {
+    //   newFormErrors.email = 'Invalid email format';
+    //   isValid = false;
+    // }
 
 
 
@@ -107,7 +107,7 @@ export default function ProfileComponent() {
               {formErrors.lastName && <div className="invalid-feedback">{formErrors.lastName}</div>}
             </Form.Group>
           </Col>
-          <Col xs='12' >
+          {/* <Col xs='12' >
             <Form.Group controlId="email">
               <Form.Control
                 type="email"
@@ -119,7 +119,7 @@ export default function ProfileComponent() {
               />
               {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
             </Form.Group>
-          </Col>
+          </Col> */}
 
         </Row>
 
