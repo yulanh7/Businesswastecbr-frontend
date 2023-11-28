@@ -122,7 +122,7 @@ function GroupLeaderConsolePage() {
             >
               {submitUserLoading ? 'Loading' : 'Add users in bulk'}
             </Button>
-            <Button variant="darkGreen" onClick={handleShowModal}>Add a user</Button>
+            <Button variant="deepDark" onClick={handleShowModal}>Add a user</Button>
 
             <div className={utilStyles.mB10px}>
               {bulkAddUserMessage && bulkAddUserMessage.failedCount !== 0 && (

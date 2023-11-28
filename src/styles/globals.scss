@@ -68,6 +68,18 @@ img {
   }
 
 }
+.btn.btn-deepDark {
+  background: $deepDark;
+  color: #fff;
+  border: 1px solid $deepDark;
+  &:hover{
+    background: $deepDarkHover;
+    border: 1px solid $deepDarkHover;
+
+  color: #fff;
+  }
+
+}
 .btn.btn-secondary {
   background: $lightGray;
   color: #fff;
@@ -82,6 +94,8 @@ img {
 }
 .btn.btn-warning:hover {
   color: #fff;
+  background: $darkPurple;
+  border: 1px solid $darkPurple;
 }
 
 .dropdown-toggle.btn.btn-success {
