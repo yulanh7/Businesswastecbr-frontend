@@ -57,10 +57,14 @@ function GroupLeaderConsolePage() {
     if (selectedFile) {
       setErrorMessage(null); // Reset error message if there is a file selected
       dispatch(bulkAddNormalUsersSlice(selectedFile));
+      resetFileInput();
+
     }
   };
 
   const handleDeleteSelectedClick = async () => {
+    dispatch(resetForm());
+    resetFileInput();
     if (!selectedUsers || selectedUsers.length === 0) {
       alert('Please select at least one user.');
       return;
@@ -81,6 +85,9 @@ function GroupLeaderConsolePage() {
   };
 
   const handleResetPWSelectedClick = async () => {
+    dispatch(resetForm());
+    resetFileInput();
+
     if (!selectedUsers || selectedUsers.length === 0) {
       alert('Please select at least one user.');
       return;
@@ -89,6 +96,13 @@ function GroupLeaderConsolePage() {
     if (confirmDelete) {
       await dispatch(bulkResetPWUsersSlice({ userIds: selectedUsers }));
       setSelectedUsers([]);
+    }
+  };
+
+  const resetFileInput = () => {
+    setSelectedFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
