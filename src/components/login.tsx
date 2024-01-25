@@ -136,13 +136,16 @@ const LoginComponent: React.FC<LoginComponentProps> = ({ handleActiveSection, su
         {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
 
       </Form.Group>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        sitekey="6Lf2NMUoAAAAALXNSMVQLOgvP65xYaVDiCjtTqBx"
-        onChange={handleRecaptchaChange}
-        className={`form-control form-recaptcha ${formErrors.isRecaptchaVerified ? 'is-invalid' : ''}`}
+      {process.env.NODE_ENV === 'production' && (
 
-      />
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey="6Lf2NMUoAAAAALXNSMVQLOgvP65xYaVDiCjtTqBx"
+          onChange={handleRecaptchaChange}
+          className={`form-control form-recaptcha ${formErrors.isRecaptchaVerified ? 'is-invalid' : ''}`}
+
+        />
+      )}
       {formErrors.isRecaptchaVerified && <div className="invalid-feedback">{formErrors.isRecaptchaVerified}</div>}
 
       {submitUserError && <div className="error-message">{submitUserError}</div>}
