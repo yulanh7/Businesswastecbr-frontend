@@ -3,6 +3,7 @@ import Layout from '../src/components/Layout';
 import UserTable from '../src/components/UserTable';
 import { Container, Button } from 'react-bootstrap';
 import AddUserModal from '../src/components/AddUserModule';
+import InformationModule from '../src/components/InformationModule';
 import utilStyles from "../src/styles/utils.module.scss";
 import { bulkAddNormalUsersSlice, resetForm, bulkDeleteUsersSlice, fetchAllUsersSlice, bulkResetPWUsersSlice } from "../store/userSlice";
 import { RootState, useAppDispatch } from '../store';
@@ -10,6 +11,8 @@ import pageStyles from "../src/styles/page.module.scss";
 import { useSelector } from 'react-redux';
 import { defaultUsersObject } from "../ultility/interfaces";
 import Banner from "../src/components/Banner";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 function GroupLeaderConsolePage() {
@@ -25,6 +28,8 @@ function GroupLeaderConsolePage() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+  const [showImage, setShowImage] = useState(false);
+
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(totalRecord / pageSize);
 
@@ -36,6 +41,7 @@ function GroupLeaderConsolePage() {
     setShowModal(true)
   };
   const handleCloseModal = () => setShowModal(false);
+  const handleCloseImgModal = () => setShowImage(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
@@ -115,7 +121,10 @@ function GroupLeaderConsolePage() {
 
           </li>
           <li>
-            To upload in bulk, use the Choose file button to upload an excel spreadsheet with three columns,
+            To upload in bulk, use the Choose file button to upload an excel spreadsheet
+            <span className="info-icon" onMouseEnter={() => setShowImage(true)}>  <FontAwesomeIcon icon={faInfoCircle} />  </span>
+            <InformationModule show={showImage} onHide={handleCloseImgModal} />
+            with three columns,
             containing staff details: First Name, Last Name and Email.
             Omit the headings from the spreadsheet.
           </li>
