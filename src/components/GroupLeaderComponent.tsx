@@ -126,7 +126,22 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
         setPage(newPage);
         // Update local storage and fetch data for the new page
         localStorage.setItem('normalUserPage', newPage.toString());
-        dispatch(fetchAllUsersSlice({ page: newPage }));
+        if (userInfo) {
+          if (userInfo.userType === 'Admin') {
+            if (businessId) {
+              const payload = {
+                file: selectedFile,
+                businessId
+              }
+              dispatch(fetchAllUsersSlice({ page: newPage, businessId }));
+            }
+          } else {
+            const payload = {
+              file: selectedFile,
+            }
+            dispatch(fetchAllUsersSlice({ page: newPage }));
+          }
+        }
       }
     }
   };
@@ -231,22 +246,30 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
 
         </div>
         {businessId ?
-          <UserTable
-            businessId={businessId}
-            selectedUsers={selectedUsers}
-            setSelectedUsers={setSelectedUsers}
-            handleDeleteSelectedClick={handleDeleteSelectedClick}
-            handleResetPWSelectedClick={handleResetPWSelectedClick}
-          /> :
-          <UserTable
-            selectedUsers={selectedUsers}
-            setSelectedUsers={setSelectedUsers}
-            handleDeleteSelectedClick={handleDeleteSelectedClick}
-            handleResetPWSelectedClick={handleResetPWSelectedClick}
-          />
+          <>
+            <UserTable
+              businessId={businessId}
+              selectedUsers={selectedUsers}
+              setSelectedUsers={setSelectedUsers}
+              handleDeleteSelectedClick={handleDeleteSelectedClick}
+              handleResetPWSelectedClick={handleResetPWSelectedClick}
+            />
+            <AddUserModal show={showModal} onHide={handleCloseModal} businessId={businessId} />
+
+          </>
+          :
+          <>
+            <UserTable
+              selectedUsers={selectedUsers}
+              setSelectedUsers={setSelectedUsers}
+              handleDeleteSelectedClick={handleDeleteSelectedClick}
+              handleResetPWSelectedClick={handleResetPWSelectedClick}
+            />
+            <AddUserModal show={showModal} onHide={handleCloseModal} />
+
+          </>
         }
 
-        <AddUserModal show={showModal} onHide={handleCloseModal} />
       </Container>
     </Layout>
   );

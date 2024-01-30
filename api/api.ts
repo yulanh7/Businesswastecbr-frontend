@@ -206,15 +206,19 @@ export const bulkResetPWUsers = (payload: any) => {
     payload
   );
 };
+export const registerUser = (payload: addUserProps) => {
+  let apiPrefix = "/api/users";
+  if (payload.businessId) {
+    apiPrefix = `api/admins/group-leader/${payload.businessId}`;
+  }
+  return makeRequest("post", `${apiPrefix}/register/normal-user`, payload);
+};
 
 export const registerAdmin = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/admin`, payload);
 
 export const updateAdmin = (payload: updateUserProps) =>
   makeRequest("put", `/api/admins/admin/update`, payload);
-
-export const registerUser = (payload: addUserProps) =>
-  makeRequest("post", `/api/users/register/normal-user`, payload);
 
 export const fetchSelfDetail = () =>
   makeRequest("get", `/api/users/user-details`);

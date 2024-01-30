@@ -10,10 +10,12 @@ const defaultuserProps = {
   // phone: "",
   email: "",
   userType: "Normal User",
+  businessId: ""
 }
 interface AddUserModalProps {
   show: boolean;
   onHide: () => void;
+  businessId?: string;
 }
 
 interface Business {
@@ -21,13 +23,28 @@ interface Business {
   businessName: string;
 }
 
+type UserInfoType = {
+  userType: 'Admin' | 'Group Leader';
+  firstName: string;
+  // ... any other properties you expect on userInfo
+} | null;
 
-function AddUserModal({ show, onHide }: AddUserModalProps) {
+
+function AddUserModal({ show, onHide, businessId }: AddUserModalProps) {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState(defaultuserProps);
   const { submitUserMessage, submitUserError } = useSelector((state: RootState) => state.user);
   const [formErrors, setFormErrors] = useState(defaultuserProps);
+  const [userInfo, setUserInfo] = useState<UserInfoType>(null);
 
+  useEffect(() => {
+    const storedUserInfo = localStorage.getItem('userInfo');
+    localStorage.setItem('normalUserPage', '1');
+    if (storedUserInfo) {
+      const parsedInfo = JSON.parse(storedUserInfo);
+      setUserInfo(parsedInfo);
+    }
+  }, [])
 
   const validateForm = () => {
     const newFormErrors = { ...defaultuserProps };
@@ -81,7 +98,15 @@ function AddUserModal({ show, onHide }: AddUserModalProps) {
 
   const handleAddUser = async () => {
     if (validateForm()) {
-      dispatch(registerUserSlice(formData));
+      if (userInfo) {
+        if (userInfo.userType === 'Admin') {
+          if (businessId) {
+            dispatch(registerUserSlice({ ...formData, businessId }));
+          }
+        } else {
+          dispatch(registerUserSlice(formData));
+        }
+      }
     }
   };
 
