@@ -178,6 +178,14 @@ export const fetchAllUsers = (payload: fetchUsesProps) => {
   );
 };
 
+export const updateUser = (payload: updateUserProps) => {
+  let apiPrefix = "/api/group-leaders/normal-user/";
+  if (payload.businessId) {
+    apiPrefix = `api/admins/group-leader/${payload.businessId}/normal-user`;
+  }
+  return makeRequest("put", `${apiPrefix}/update`, payload);
+};
+
 export const registerAdmin = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/admin`, payload);
 
@@ -186,9 +194,6 @@ export const updateAdmin = (payload: updateUserProps) =>
 
 export const registerUser = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/normal-user`, payload);
-
-export const updateUser = (payload: updateUserProps) =>
-  makeRequest("put", `/api/group-leaders/normal-user/update`, payload);
 
 export const bulkAddNormalUsers = (file: File) => {
   const formData = new FormData();

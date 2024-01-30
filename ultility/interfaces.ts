@@ -75,6 +75,7 @@ export interface addUserProps {
 }
 export interface updateUserProps {
   userId: string;
+  businessId?: string;
   firstName: string;
   lastName: string;
   // phone: string;

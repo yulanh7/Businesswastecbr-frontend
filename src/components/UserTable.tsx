@@ -65,14 +65,18 @@ const UserTable: React.FC<UserTableProps> = ({
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   const totalPages = Math.ceil(totalRecord / pageSize);
-
   useEffect(() => {
     const storedUserInfo = localStorage.getItem('userInfo');
     localStorage.setItem('normalUserPage', '1');
     if (storedUserInfo) {
       const parsedInfo = JSON.parse(storedUserInfo);
       setUserInfo(parsedInfo);
-      if (parsedInfo.userType === 'Admin') {
+    }
+  }, [])
+
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.userType === 'Admin') {
         if (businessId) {
           dispatch(fetchAllUsersSlice({ page, businessId }));
         }
@@ -80,7 +84,7 @@ const UserTable: React.FC<UserTableProps> = ({
         dispatch(fetchAllUsersSlice({ page }));
       }
     }
-  }, [])
+  }, [userInfo, dispatch, page, businessId])
 
 
   const validateEditForm = (editedUsers: Users) => {
@@ -115,19 +119,43 @@ const UserTable: React.FC<UserTableProps> = ({
     if (!editedUsers) {
       return;
     }
-    if (validateEditForm(editedUsers)) {
-      const payload = {
-        firstName: editedUsers.firstName,
-        lastName: editedUsers.lastName,
-        email: editedUsers.email,
-        // phone: editedUsers.phone,
-        userId: userId,
-      };
-      await dispatch(updateUserSlice(payload));
+    if (validateEditForm(editedUsers) && userInfo) {
+      if (userInfo.userType === 'Admin') {
+        const payload = {
+          firstName: editedUsers.firstName,
+          lastName: editedUsers.lastName,
+          email: editedUsers.email,
+          userId: userId,
+          businessId,
+        };
+        await dispatch(updateUserSlice(payload));
+      } else {
+        const payload = {
+          firstName: editedUsers.firstName,
+          lastName: editedUsers.lastName,
+          email: editedUsers.email,
+          userId: userId,
+        };
+        await dispatch(updateUserSlice(payload));
+      }
+
       setEditingUsersId(null);
     }
 
   };
+
+
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.userType === 'Admin') {
+        if (businessId) {
+          dispatch(fetchAllUsersSlice({ page, businessId }));
+        }
+      } else {
+        dispatch(fetchAllUsersSlice({ page }));
+      }
+    }
+  }, [userInfo, dispatch, page, businessId])
 
 
   const handlePageChange = (newPage: number) => {
