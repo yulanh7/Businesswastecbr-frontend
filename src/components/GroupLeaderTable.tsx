@@ -13,11 +13,13 @@ import { RootState, useAppDispatch } from '../../store';
 import { useSelector } from 'react-redux';
 import { defaultUsersObject } from "../../ultility/interfaces";
 import SortIcons from "./SortIcons";
+import { useRouter } from 'next/router';
 
 
 interface GroupLeader {
   userId: string,
   businessName: string,
+  businessId: string,
   businessType: string,
   firstName: string,
   lastName: string,
@@ -34,6 +36,7 @@ interface GroupLeaderTableProps {
 }
 
 const GroupLeaderTable: React.FC = () => {
+  const router = useRouter();
   const {
     allGroupLeaders:
     { records = [], pageIdx = 1, pageSize = 10, totalRecord = 0 } = defaultUsersObject,
@@ -182,6 +185,10 @@ const GroupLeaderTable: React.FC = () => {
       sortDirection: direction
     }));
   };
+
+  const handleEnterBusiness = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, businessId: string) => {
+    router.push(`admin/group-leader/${businessId}`)
+  }
 
   return (
     <div>
@@ -407,10 +414,16 @@ const GroupLeaderTable: React.FC = () => {
                       </Button>
                     </>
                   ) : (
-                    <Button variant="info" onClick={() => handleEditClick(user.userId)} className={`${utilStyles.tableButton}`} >
-                      Edit
-                    </Button>
+                    <>
+                      <Button variant="info" onClick={() => handleEditClick(user.userId)} className={`${utilStyles.tableButton}`} >
+                        Edit
+                      </Button>
+                      <div className={utilStyles.pT10px}>
+                        <Button onClick={(e) => handleEnterBusiness(e, user.businessId)}>Enter</Button>
+                      </div>
+                    </>
                   )}
+
                 </td>
               </tr>
             ))
@@ -422,9 +435,6 @@ const GroupLeaderTable: React.FC = () => {
               </td>
             </tr>
           )}
-
-
-
         </tbody>
       </Table >
       <Pagination>
