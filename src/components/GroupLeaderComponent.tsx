@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import UserTable from './UserTable';
 import { Container, Button } from 'react-bootstrap';
@@ -16,6 +16,12 @@ interface GroupLeaderComponentProps {
   businessId?: string
 }
 
+type UserInfoType = {
+  userType: 'Admin' | 'Group Leader';
+  firstName: string;
+  // ... any other properties you expect on userInfo
+} | null;
+
 function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
   const dispatch = useAppDispatch();
   const {
@@ -30,12 +36,22 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [showImage, setShowImage] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfoType>(null);
 
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(totalRecord / pageSize);
 
 
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const storedUserInfo = localStorage.getItem('userInfo');
+    localStorage.setItem('normalUserPage', '1');
+    if (storedUserInfo) {
+      const parsedInfo = JSON.parse(storedUserInfo);
+      setUserInfo(parsedInfo);
+    }
+  }, [])
 
   const handleShowModal = () => {
     dispatch(resetForm());
@@ -63,7 +79,22 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
     }
     if (selectedFile) {
       setErrorMessage(null); // Reset error message if there is a file selected
-      dispatch(bulkAddNormalUsersSlice(selectedFile));
+      if (userInfo) {
+        if (userInfo.userType === 'Admin') {
+          if (businessId) {
+            const payload = {
+              file: selectedFile,
+              businessId
+            }
+            dispatch(bulkAddNormalUsersSlice(payload));
+          }
+        } else {
+          const payload = {
+            file: selectedFile,
+          }
+          dispatch(bulkAddNormalUsersSlice(payload));
+        }
+      }
       resetFileInput();
 
     }

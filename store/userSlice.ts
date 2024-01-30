@@ -37,6 +37,7 @@ import {
   contactUsProps,
   addUserProps,
   fetchAdminProps,
+  bulkAddNormalUsersProps,
 } from "../ultility/interfaces";
 
 const defaultSelfDetailProps = {
@@ -521,15 +522,16 @@ export const bulkResetPWUsersSlice =
   };
 
 export const bulkAddNormalUsersSlice =
-  (file: File): AppThunk<Promise<void>> =>
+  (payload: bulkAddNormalUsersProps): AppThunk<Promise<void>> =>
   async (dispatch) => {
     try {
       dispatch(submitUserStart());
-      const response = await bulkAddNormalUsers(file);
+      const response = await bulkAddNormalUsers(payload);
       dispatch(bulkAddUserSuccess(response));
       const normalUserPage = localStorage.getItem("normalUserPage") || 1;
       const { data } = await fetchAllUsers({
         page: normalUserPage,
+        businessId: payload.businessId,
       });
       dispatch(fetchAllUsersSuccess(data));
     } catch (error: any) {

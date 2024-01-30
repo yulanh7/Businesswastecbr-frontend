@@ -8,6 +8,7 @@ import {
   updateSelfDetailProps,
   contactUsProps,
   fetchAdminProps,
+  bulkAddNormalUsersProps,
 } from "../ultility/interfaces";
 import Router from "next/router";
 
@@ -195,10 +196,14 @@ export const updateAdmin = (payload: updateUserProps) =>
 export const registerUser = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/normal-user`, payload);
 
-export const bulkAddNormalUsers = (file: File) => {
+export const bulkAddNormalUsers = (payload: bulkAddNormalUsersProps) => {
   const formData = new FormData();
-  formData.append("file", file);
-  return makeRequest("post", `/api/group-leaders/bulk-create-users`, formData);
+  formData.append("file", payload.file);
+  let apiPrefix = "/api/group-leaders";
+  if (payload.businessId) {
+    apiPrefix = `api/admins/group-leader/${payload.businessId}`;
+  }
+  return makeRequest("post", `${apiPrefix}/bulk-create-users`, formData);
 };
 
 export const fetchSelfDetail = () =>

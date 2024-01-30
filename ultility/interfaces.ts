@@ -81,6 +81,10 @@ export interface updateUserProps {
   // phone: string;
   email: string;
 }
+export interface bulkAddNormalUsersProps {
+  file: File;
+  businessId?: string;
+}
 export interface updateSelfDetailProps {
   firstName: string;
   lastName: string;
