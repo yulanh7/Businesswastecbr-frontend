@@ -29,18 +29,28 @@ interface Users {
 
 interface UserTableProps {
   selectedUsers: string[];
+  businessId?: string;
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[]>>;
   handleDeleteSelectedClick: () => void;
   handleResetPWSelectedClick: () => void;
 }
+
+type UserInfoType = {
+  userType: 'Admin' | 'Group Leader';
+  firstName: string;
+  // ... any other properties you expect on userInfo
+} | null;
 
 
 
 const UserTable: React.FC<UserTableProps> = ({
   selectedUsers,
   setSelectedUsers,
+  businessId
 }) => {
   const dispatch = useAppDispatch();
+
+  const [userInfo, setUserInfo] = useState<UserInfoType>(null);
   const {
     allUsers:
     { records = [], pageIdx = 1, pageSize = 10, totalRecord = 0 } = defaultUsersObject,
@@ -56,12 +66,21 @@ const UserTable: React.FC<UserTableProps> = ({
 
   const totalPages = Math.ceil(totalRecord / pageSize);
 
-
   useEffect(() => {
+    const storedUserInfo = localStorage.getItem('userInfo');
     localStorage.setItem('normalUserPage', '1');
-
-    dispatch(fetchAllUsersSlice({ page }));
-  }, [dispatch]);
+    if (storedUserInfo) {
+      const parsedInfo = JSON.parse(storedUserInfo);
+      setUserInfo(parsedInfo);
+      if (parsedInfo.userType === 'Admin') {
+        if (businessId) {
+          dispatch(fetchAllUsersSlice({ page, businessId }));
+        }
+      } else {
+        dispatch(fetchAllUsersSlice({ page }));
+      }
+    }
+  }, [])
 
 
   const validateEditForm = (editedUsers: Users) => {
