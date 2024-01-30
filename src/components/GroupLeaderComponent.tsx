@@ -216,7 +216,7 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
       <Container className="page-section">
         {business &&
           <p className={pageStyles.businessTitle}>
-            / <Link href='/admin_console'> Admin Console</Link> / {business && business.businessName}
+            / <Link href='/admin_console'>Admin Console</Link> / {business && business.businessName}
           </p>
         }
         <div className={pageStyles.userTableAction}>
