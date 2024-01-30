@@ -41,6 +41,7 @@ export interface fetchAdminProps {
 
 export interface fetchUsesProps {
   page: any;
+  businessId?: any;
   sortColumn?: any;
   sortDirection?: any;
   // limit: number;

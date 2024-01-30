@@ -167,11 +167,16 @@ export const fetchAllAdmin = (payload: fetchAdminProps) =>
     `/api/admins/admins?sortColumn=${payload.sortColumn}&sortDirection=${payload.sortDirection}`
   );
 
-export const fetchAllUsers = (payload: fetchUsesProps) =>
-  makeRequest(
+export const fetchAllUsers = (payload: fetchUsesProps) => {
+  let apiPrefix = "api/group-leaders/normal-users";
+  if (payload.businessId) {
+    apiPrefix = `api/admins/group-leader/${payload.businessId}/normal-users`;
+  }
+  return makeRequest(
     "get",
-    `api/group-leaders/normal-users?page=${payload.page}&limit=${limit}&sortColumn=${payload.sortColumn}&sortDirection=${payload.sortDirection}`
+    `${apiPrefix}?page=${payload.page}&limit=${limit}&sortColumn=${payload.sortColumn}&sortDirection=${payload.sortDirection}`
   );
+};
 
 export const registerAdmin = (payload: addUserProps) =>
   makeRequest("post", `/api/users/register/admin`, payload);
