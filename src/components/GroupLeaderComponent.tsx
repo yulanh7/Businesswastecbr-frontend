@@ -141,7 +141,15 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
     }
     const confirmDelete = window.confirm(`Are you sure you want to reset the password of the selected users?`);
     if (confirmDelete) {
-      await dispatch(bulkResetPWUsersSlice({ userIds: selectedUsers }));
+      if (userInfo) {
+        if (userInfo.userType === 'Admin') {
+          if (businessId) {
+            await dispatch(bulkResetPWUsersSlice({ userIds: selectedUsers, businessId }));
+          }
+        } else {
+          await dispatch(bulkResetPWUsersSlice({ userIds: selectedUsers }));
+        }
+      }
       setSelectedUsers([]);
     }
   };

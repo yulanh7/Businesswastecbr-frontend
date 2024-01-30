@@ -146,13 +146,6 @@ export const bulkDeleteAdmin = (payload: any) =>
 export const bulkResetPWAdmin = (payload: any) =>
   makeRequest("post", `/api/admins/bulkSendNewPasswords`, payload);
 
-export const bulkResetPWUsers = (payload: any) =>
-  makeRequest(
-    "post",
-    `/api/group-leaders/bulkSendNewPasswordsToNormalUsers`,
-    payload
-  );
-
 export const fetchAllGroupLeaders = (payload: fetchUsesProps) =>
   makeRequest(
     "get",
@@ -200,6 +193,18 @@ export const bulkDeleteUsers = (payload: any) => {
     apiPrefix = `api/admins/group-leader/${payload.businessId}/normal-users`;
   }
   return makeRequest("put", `${apiPrefix}/bulk-delete`, payload);
+};
+
+export const bulkResetPWUsers = (payload: any) => {
+  let apiPrefix = "/api/group-leaders";
+  if (payload.businessId) {
+    apiPrefix = `api/admins/group-leader/${payload.businessId}`;
+  }
+  return makeRequest(
+    "post",
+    `${apiPrefix}/bulkSendNewPasswordsToNormalUsers`,
+    payload
+  );
 };
 
 export const registerAdmin = (payload: addUserProps) =>
