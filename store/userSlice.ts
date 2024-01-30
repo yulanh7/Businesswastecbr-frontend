@@ -368,6 +368,7 @@ export const registerUserSlice =
       const normalUserPage = localStorage.getItem("normalUserPage") || 1;
       const { data } = await fetchAllUsers({
         page: normalUserPage,
+        businessId: payload.businessId,
       });
       dispatch(fetchAllUsersSuccess(data));
     } catch (error: any) {
@@ -496,7 +497,6 @@ export const bulkDeleteUsersSlice =
     try {
       dispatch(submitUserStart());
       const { message } = await bulkDeleteUsers(payload);
-      debugger;
       dispatch(submitUserSuccess("Submit successfully"));
       const normalUserPage = localStorage.getItem("normalUserPage") || 1;
       const { data } = await fetchAllUsers({

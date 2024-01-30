@@ -144,24 +144,18 @@ const UserTable: React.FC<UserTableProps> = ({
 
   };
 
-
-  useEffect(() => {
-    if (userInfo) {
-      if (userInfo.userType === 'Admin') {
-        if (businessId) {
-          dispatch(fetchAllUsersSlice({ page, businessId }));
-        }
-      } else {
-        dispatch(fetchAllUsersSlice({ page }));
-      }
-    }
-  }, [userInfo, dispatch, page, businessId])
-
-
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
     localStorage.setItem('normalUserPage', newPage.toString());
-    dispatch(fetchAllUsersSlice({ page: newPage }));
+    if (userInfo) {
+      if (userInfo.userType === 'Admin') {
+        if (businessId) {
+          dispatch(fetchAllUsersSlice({ page: newPage, businessId }));
+        }
+      } else {
+        dispatch(fetchAllUsersSlice({ page: newPage }));
+      }
+    }
   };
 
   const generatePageItems = () => {
@@ -179,11 +173,24 @@ const UserTable: React.FC<UserTableProps> = ({
   const handleSort = (column: string, direction: "asc" | "desc") => {
     setSortColumn(column);
     setSortDirection(direction);
-    dispatch(fetchAllUsersSlice({
-      page: 1,
-      sortColumn: column,
-      sortDirection: direction
-    }));
+    if (userInfo) {
+      if (userInfo.userType === 'Admin') {
+        if (businessId) {
+          dispatch(fetchAllUsersSlice({
+            page: 1,
+            sortColumn: column,
+            sortDirection: direction,
+            businessId,
+          }));
+        }
+      } else {
+        dispatch(fetchAllUsersSlice({
+          page: 1,
+          sortColumn: column,
+          sortDirection: direction
+        }));
+      }
+    }
   };
 
   return (
