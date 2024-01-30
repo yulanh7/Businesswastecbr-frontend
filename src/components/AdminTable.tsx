@@ -181,8 +181,6 @@ const AdminTable: React.FC = () => {
 
             </th>
             <th>#</th>
-
-
             <th>
               <div>
                 First Name
@@ -216,9 +214,6 @@ const AdminTable: React.FC = () => {
                 />
               </div>
             </th>
-
-
-
             <th>Actions</th>
           </tr>
         </thead>

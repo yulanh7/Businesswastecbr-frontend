@@ -306,7 +306,7 @@ const GroupLeaderTable: React.FC = () => {
                     }}
                   />
                 </td>
-                <td>{index + 1}</td>
+                <td> {(page - 1) * pageSize + index + 1}</td>
                 <td>{user.businessName}</td>
                 <td>
                   {editingGroupLeaderId === user.userId ? (

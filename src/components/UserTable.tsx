@@ -292,7 +292,7 @@ const UserTable: React.FC<UserTableProps> = ({
                   }}
                 />
               </td>
-              <td>{index + 1}</td>
+              <td>{(page - 1) * pageSize + index + 1}</td>
               <td>
                 {editingUsersId === user.userId ? (
                   <>
