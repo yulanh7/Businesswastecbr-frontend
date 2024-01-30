@@ -96,6 +96,9 @@ export const resetPassword = (payload: { token: string; password: string }) =>
 
 export const fetchAllBusinesses = () => makeRequest("get", `/api/businesses`);
 
+export const fetchABusiness = (businessId: string) =>
+  makeRequest("get", `/api/businesses/${businessId}`);
+
 export const login = (payload: { email: string; password: string }) =>
   makeRequest("post", `/api/users/login`, payload, false); // login doesn't need auth
 

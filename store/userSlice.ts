@@ -25,6 +25,7 @@ import {
   askAQuestion,
   registerAdmin,
   updateAdmin,
+  fetchABusiness,
 } from "../api/api";
 import Router from "next/router";
 import {
@@ -69,6 +70,7 @@ interface UserData {
   submitUserMessage: string | null;
   bulkAddUserMessage: any;
   selfDetail: any;
+  business: any;
 }
 
 const initialState: UserData = {
@@ -87,6 +89,7 @@ const initialState: UserData = {
   submitUserMessage: null,
   bulkAddUserMessage: null,
   selfDetail: defaultSelfDetailProps,
+  business: null,
 };
 
 const useSlice = createSlice({
@@ -107,6 +110,10 @@ const useSlice = createSlice({
     },
     fetchAllUsersSuccess: (state, action: PayloadAction<any>) => {
       state.allUsers = action.payload || defaultUsersObject;
+      state.fetchUserLoading = false;
+    },
+    fetchABusinessSuccess: (state, action: PayloadAction<any>) => {
+      state.business = action.payload;
       state.fetchUserLoading = false;
     },
     fetchSelfDetailSuccess: (state, action: PayloadAction<any>) => {
@@ -182,6 +189,7 @@ export const {
   fetchSelfDetailSuccess,
   bulkAddUserSuccess,
   submitFormSuccess,
+  fetchABusinessSuccess,
 } = useSlice.actions;
 export default useSlice.reducer;
 
@@ -194,6 +202,19 @@ export const fetchAllUsersSlice =
       dispatch(fetchUserStart());
       const { data } = await fetchAllUsers(payload);
       dispatch(fetchAllUsersSuccess(data));
+    } catch (error: any) {
+      dispatch(fetchUserFailure((error as Error).message));
+    }
+  };
+export const fetchABusinessSlice =
+  (
+    businessId: string
+  ): AppThunk<Promise<void>> => // Add <Promise<void>> to specify the return type
+  async (dispatch) => {
+    try {
+      dispatch(fetchUserStart());
+      const response = await fetchABusiness(businessId);
+      dispatch(fetchABusinessSuccess(response));
     } catch (error: any) {
       dispatch(fetchUserFailure((error as Error).message));
     }

@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import UserTable from './UserTable';
+import Link from "next/link";
 import { Container, Button } from 'react-bootstrap';
 import AddUserModal from './AddUserModule';
 import InformationModule from './InformationModule';
 import utilStyles from "../styles/utils.module.scss";
-import { bulkAddNormalUsersSlice, resetForm, bulkDeleteUsersSlice, fetchAllUsersSlice, bulkResetPWUsersSlice } from "../../store/userSlice";
+import {
+  bulkAddNormalUsersSlice,
+  resetForm,
+  bulkDeleteUsersSlice,
+  fetchAllUsersSlice,
+  bulkResetPWUsersSlice,
+  fetchABusinessSlice
+} from "../../store/userSlice";
 import { RootState, useAppDispatch } from '../../store';
 import pageStyles from "../styles/page.module.scss";
 import { useSelector } from 'react-redux';
@@ -29,7 +37,8 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
     { records = [], pageSize = 10, totalRecord = 0 } = defaultUsersObject,
     bulkAddUserMessage,
     submitUserLoading,
-    submitUserError
+    submitUserError,
+    business
   } = useSelector((state: RootState) => state.user);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -50,6 +59,12 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
     if (storedUserInfo) {
       const parsedInfo = JSON.parse(storedUserInfo);
       setUserInfo(parsedInfo);
+    }
+  }, [])
+
+  useEffect(() => {
+    if (businessId) {
+      dispatch(fetchABusinessSlice(businessId))
     }
   }, [])
 
@@ -199,9 +214,9 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
         </ul>
       </Banner>
       <Container className="page-section">
-        <h1>
-          {businessId && businessId}
-        </h1>
+        <p className={pageStyles.businessTitle}>
+          /<Link href='/admin_console'>Admin Console </Link>/{business && business.businessName}
+        </p>
         <div className={pageStyles.userTableAction}>
           <div className={`${utilStyles.mB10px}`}>
             <input type="file" accept=".xls,.xlsx" onChange={handleFileChange} disabled={submitUserLoading} onClick={handleResetForm} ref={fileInputRef}
