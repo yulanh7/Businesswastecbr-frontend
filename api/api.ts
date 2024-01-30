@@ -146,9 +146,6 @@ export const bulkDeleteAdmin = (payload: any) =>
 export const bulkResetPWAdmin = (payload: any) =>
   makeRequest("post", `/api/admins/bulkSendNewPasswords`, payload);
 
-export const bulkDeleteUsers = (payload: any) =>
-  makeRequest("put", `/api/group-leaders/normal-users/bulk-delete`, payload);
-
 export const bulkResetPWUsers = (payload: any) =>
   makeRequest(
     "post",
@@ -180,21 +177,12 @@ export const fetchAllUsers = (payload: fetchUsesProps) => {
 };
 
 export const updateUser = (payload: updateUserProps) => {
-  let apiPrefix = "/api/group-leaders/normal-user/";
+  let apiPrefix = "/api/group-leaders/normal-user";
   if (payload.businessId) {
     apiPrefix = `api/admins/group-leader/${payload.businessId}/normal-user`;
   }
   return makeRequest("put", `${apiPrefix}/update`, payload);
 };
-
-export const registerAdmin = (payload: addUserProps) =>
-  makeRequest("post", `/api/users/register/admin`, payload);
-
-export const updateAdmin = (payload: updateUserProps) =>
-  makeRequest("put", `/api/admins/admin/update`, payload);
-
-export const registerUser = (payload: addUserProps) =>
-  makeRequest("post", `/api/users/register/normal-user`, payload);
 
 export const bulkAddNormalUsers = (payload: bulkAddNormalUsersProps) => {
   const formData = new FormData();
@@ -205,6 +193,23 @@ export const bulkAddNormalUsers = (payload: bulkAddNormalUsersProps) => {
   }
   return makeRequest("post", `${apiPrefix}/bulk-create-users`, formData);
 };
+
+export const bulkDeleteUsers = (payload: any) => {
+  let apiPrefix = "/api/group-leaders/normal-users";
+  if (payload.businessId) {
+    apiPrefix = `api/admins/group-leader/${payload.businessId}/normal-users`;
+  }
+  return makeRequest("put", `${apiPrefix}/bulk-delete`, payload);
+};
+
+export const registerAdmin = (payload: addUserProps) =>
+  makeRequest("post", `/api/users/register/admin`, payload);
+
+export const updateAdmin = (payload: updateUserProps) =>
+  makeRequest("put", `/api/admins/admin/update`, payload);
+
+export const registerUser = (payload: addUserProps) =>
+  makeRequest("post", `/api/users/register/normal-user`, payload);
 
 export const fetchSelfDetail = () =>
   makeRequest("get", `/api/users/user-details`);

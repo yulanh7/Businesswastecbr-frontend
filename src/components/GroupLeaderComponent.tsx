@@ -109,7 +109,16 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
     }
     const confirmDelete = window.confirm(`Are you sure you want to delete selected users?`);
     if (confirmDelete) {
-      await dispatch(bulkDeleteUsersSlice({ userIds: selectedUsers }));
+      if (userInfo) {
+        if (userInfo.userType === 'Admin') {
+          if (businessId) {
+            await dispatch(bulkDeleteUsersSlice({ userIds: selectedUsers, businessId }));
+          }
+        } else {
+
+          await dispatch(bulkDeleteUsersSlice({ userIds: selectedUsers }));
+        }
+      }
       setSelectedUsers([]);
       if (page === totalPages && selectedUsers.length === records.length) {
         let newPage = page - 1;

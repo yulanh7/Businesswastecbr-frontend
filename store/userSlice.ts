@@ -501,6 +501,7 @@ export const bulkDeleteUsersSlice =
       const normalUserPage = localStorage.getItem("normalUserPage") || 1;
       const { data } = await fetchAllUsers({
         page: normalUserPage,
+        businessId: payload.businessId,
       });
       dispatch(fetchAllUsersSuccess(data));
     } catch (error: any) {
