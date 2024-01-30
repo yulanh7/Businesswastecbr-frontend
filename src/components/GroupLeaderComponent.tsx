@@ -214,9 +214,11 @@ function GroupLeaderComponent({ businessId }: GroupLeaderComponentProps) {
         </ul>
       </Banner>
       <Container className="page-section">
-        <p className={pageStyles.businessTitle}>
-          /<Link href='/admin_console'>Admin Console </Link>/{business && business.businessName}
-        </p>
+        {business &&
+          <p className={pageStyles.businessTitle}>
+            / <Link href='/admin_console'> Admin Console</Link> / {business && business.businessName}
+          </p>
+        }
         <div className={pageStyles.userTableAction}>
           <div className={`${utilStyles.mB10px}`}>
             <input type="file" accept=".xls,.xlsx" onChange={handleFileChange} disabled={submitUserLoading} onClick={handleResetForm} ref={fileInputRef}
