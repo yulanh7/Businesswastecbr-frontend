@@ -357,7 +357,7 @@ const GroupLeaderTable: React.FC = () => {
                   )}
                 </td>
                 <td>
-                  {editingGroupLeaderId === user.userId ? (
+                  {/* {editingGroupLeaderId === user.userId ? (
                     <>
                       <Form.Control
                         type="email"
@@ -378,7 +378,8 @@ const GroupLeaderTable: React.FC = () => {
                     </>
                   ) : (
                     user.email
-                  )}
+                  )} */}
+                  {user.email}
                 </td>
 
                 <td>

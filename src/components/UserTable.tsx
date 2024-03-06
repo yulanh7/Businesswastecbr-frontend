@@ -342,7 +342,7 @@ const UserTable: React.FC<UserTableProps> = ({
                 )}
               </td>
               <td>
-                {editingUsersId === user.userId ? (
+                {/* {editingUsersId === user.userId ? (
                   <>
                     <Form.Control
                       type="email"
@@ -363,7 +363,9 @@ const UserTable: React.FC<UserTableProps> = ({
                   </>
                 ) : (
                   user.email
-                )}
+                )} */}
+                {user.email}
+
               </td>
               <td>
                 {user.streamsCompleted}

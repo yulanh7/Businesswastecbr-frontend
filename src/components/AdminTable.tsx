@@ -284,7 +284,7 @@ const AdminTable: React.FC = () => {
                   )}
                 </td>
                 <td>
-                  {editingAdminId === user.userId ? (
+                  {/* {editingAdminId === user.userId ? (
                     <>
                       <Form.Control
                         type="email"
@@ -305,7 +305,8 @@ const AdminTable: React.FC = () => {
                     </>
                   ) : (
                     user.email
-                  )}
+                  )} */}
+                  {user.email}
                 </td>
 
 
