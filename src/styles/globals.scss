@@ -458,6 +458,10 @@ button.btn.btn-primary:hover {
 .pagination {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  .page-item {
+    margin-bottom: 10px;
+  }
 }
 
 .scroll-section {
@@ -585,3 +589,5 @@ button.btn.btn-primary:hover {
   display: inline-block;
   margin-right: 10px; /* Adjust this value as needed for spacing */
 }
+
+
